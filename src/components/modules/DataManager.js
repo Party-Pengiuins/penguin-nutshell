@@ -13,6 +13,12 @@ export default Object.create(null, {
             .then(result => result.json())
         }
     },
+    getUserData: {
+        value: (key, userId) => {
+            return fetch(`${remoteURL}/${key}?userId=${userId}`)
+            .then(res => res.json())
+        }
+    },
     remove: {
         value: (key, id) => {
             return fetch(`${remoteURL}/${key}/${id}`, {
