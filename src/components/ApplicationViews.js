@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 
+
 // import "./applicationViews.css";
 
 import { Route, Redirect } from "react-router-dom";
 import UserPage from "./UserPage";
 
 
-
-
 export default class ApplicationViews extends Component {
 
+
+ 
 
 
 render() {
