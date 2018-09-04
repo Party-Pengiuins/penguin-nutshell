@@ -1,13 +1,13 @@
 import React, { Component } from "react"
 import "./Messages.css"
-//import MessageCard from "./MessagesCard"
+import MessageCard from "./MessagesCard"
 
 export default class MessagesList extends Component {
     render () {
         return (
             <React.Fragment>
                 
-                <section className="messages">
+                <section className="right-container">
                 {
                     this.props.messages.map(message =>
                         <MessageCard key={message.id} message={message.content} {...this.props} />

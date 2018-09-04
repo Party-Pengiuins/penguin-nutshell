@@ -7,6 +7,7 @@ import "./userPage.css"
 // import ArticleList from "./articles/ArticleList";
 import EventList from "./events/EventList";
 // import TaskList from "./tasks/TaskList";
+import MessageList from "./messages/MessagesList";
 
 export default class UserPage extends Component {
     state = {
@@ -102,7 +103,7 @@ export default class UserPage extends Component {
                     } */}
                 </div>
                 <div className="right-container">
-                    <h2>More Stuffs!</h2>
+                    <MessageList/>
                 </div>
             </div>
         )
