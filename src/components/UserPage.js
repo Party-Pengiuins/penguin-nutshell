@@ -1,12 +1,14 @@
 import { Component } from "react";
 import React from "react";
 import DataManager from "./modules/DataManager";
-import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+// import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./userPage.css"
 // import ArticleList from "./articles/ArticleList";
 import EventList from "./events/EventList";
 import TaskList from "./tasks/TaskList";
+import { Tabs, Tab, TabList, Icon, TabLink } from "bloomer";
+import 'bulma/css/bulma.css'
 
 export default class UserPage extends Component {
     state = {
@@ -40,7 +42,10 @@ export default class UserPage extends Component {
         })
     }
 
-    showArticles = () => {
+    showArticles = (e) => {
+        e.target.parentElement.parentElement.parentElement.children[1].classList.remove("is-active")
+        e.target.parentElement.parentElement.parentElement.children[2].classList.remove("is-active")
+        e.target.parentElement.parentElement.classList.add("is-active")
         this.setState({
             articleShow: false,
             eventShow: false,
@@ -48,15 +53,21 @@ export default class UserPage extends Component {
         })
     }
     
-    showEvents = () => {
+    showEvents = (e) => {
         console.log("events clicked")
+        e.target.parentElement.parentElement.parentElement.children[0].classList.remove("is-active")
+        e.target.parentElement.parentElement.parentElement.children[2].classList.remove("is-active")
+        e.target.parentElement.parentElement.classList.add("is-active")
         this.setState({
             articleShow: false,
             eventShow: true,
             taskShow: false
         })
     }
-    showTasks = () => {
+    showTasks = (e) => {
+        e.target.parentElement.parentElement.parentElement.children[0].classList.remove("is-active")
+        e.target.parentElement.parentElement.parentElement.children[1].classList.remove("is-active")
+        e.target.parentElement.parentElement.classList.add("is-active")
         this.setState({
             articleShow: false,
             eventShow: false,
@@ -71,23 +82,28 @@ export default class UserPage extends Component {
                     <h2>Stuffs!</h2>
                 </div>
                 <div className="mid-container">
-                    <Pagination size="md" aria-label="Page navigation example">
-                        <PaginationItem>
-                            <PaginationLink previous href="#" />
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink href="#" onClick={this.showArticles}>Articles</PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink href="#" onClick={this.showEvents}>Events</PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink href="#" onClick={this.showTasks}>Tasks</PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink next href="#" />
-                        </PaginationItem>
-                    </Pagination>
+                    <Tabs>
+                        <TabList>
+                            <Tab isActive>
+                                <TabLink>
+                                    <Icon isSize='small'><span className='fa fa-image' aria-hidden='true' /></Icon>
+                                    <span>Articles</span>
+                                </TabLink>
+                            </Tab>
+                            <Tab>
+                                <TabLink>
+                                    <Icon isSize='small'><span className='fa fa-music' aria-hidden='true' /></Icon>
+                                    <span onClick={this.showEvents}>Events</span>
+                                </TabLink>
+                            </Tab>
+                            <Tab>
+                                <TabLink>
+                                    <Icon isSize='small'><span className='fa fa-film' aria-hidden='true' /></Icon>
+                                    <span onClick={this.showTasks}>Tasks</span>
+                                </TabLink>
+                            </Tab>
+                        </TabList>
+                    </Tabs>
                     {/* {
                         this.state.articleShow === true &&
                         <ArticleList articles={this.state.articles}/>
