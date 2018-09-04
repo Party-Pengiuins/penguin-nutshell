@@ -7,7 +7,7 @@ export default class MessagesList extends Component {
         return (
             <React.Fragment>
                 
-                <section className="right-container">
+                <section className="messages">
                 {
                     this.props.messages.map(message =>
                         <MessageCard key={message.id} message={message.content} {...this.props} />

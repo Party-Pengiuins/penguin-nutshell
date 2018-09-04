@@ -8,12 +8,12 @@ export default class MessageCard extends Component {
             <div key={this.props.message.id} className="card">
                 <div className="card-body">
                     <h5 className="card-title">
-                        {this.props.message.name}
+                        {this.props.message.content}
                         <a href="#"
                             onClick={() => this.props.deleteMessage(this.props.message.id)}
                             className="card-link">Delete</a>
                              <a href="#" 
-                            onClick={() => this.props.history.push(`/messages/edit/${message.id}`)}
+                            //onClick={() => this.props.history.push(`/messages/edit/${message.id}`)}
                             className="card-link">Edit</a>
                     </h5>
                 </div>
