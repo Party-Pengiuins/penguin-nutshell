@@ -37,7 +37,7 @@ export default class Login extends Component {
         return (    
             <div className="login-container">
                 <div className="form-collection">
-                    <div className="card elevation-3 limit-width log-in-card below turned">
+                    <div className="login-card elevation-3 limit-width log-in-card below turned">
                         <div className="card-body">
                             <h2>Register</h2>
                             <div className="input-group username">
@@ -51,7 +51,7 @@ export default class Login extends Component {
                             <button type="submit" className="signup-btn" onClick={this.handleLogin}>Sign Up</button>
                         </div>
                     </div>
-                    <div className="card elevation-2 limit-width sign-up-card above">
+                    <div className="login-card elevation-2 limit-width sign-up-card above">
                         <div className="card-body">
                             <h2>Welcome to NutShell</h2>
                             <small>Another dumb-ass Social Network</small>
