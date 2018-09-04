@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./userPage.css"
 // import ArticleList from "./articles/ArticleList";
 import TaskList from "./tasks/TaskList"
+import ArticleList from "./articles/ArticleList";
 import EventList from "./events/EventList";
 import MessageList from "./messages/MessagesList";
 
@@ -43,7 +44,7 @@ export default class UserPage extends Component {
 
     showArticles = () => {
         this.setState({
-            articleShow: false,
+            articleShow: true,
             eventShow: false,
             taskShow: false
         })
@@ -89,10 +90,10 @@ export default class UserPage extends Component {
                             <PaginationLink next href="#" />
                         </PaginationItem>
                     </Pagination>
-                    {/* {
+                    {
                         this.state.articleShow === true &&
                         <ArticleList articles={this.state.articles}/>
-                    } */}
+                    }
                     {
                         this.state.eventShow === true &&
                         <EventList events={this.state.events}/>
