@@ -2,30 +2,30 @@ import React from "react"
 import PropType from "prop-types"
 
 
-const AnimalCard = ({article, deleteArticle}) => {
+const ArticleCard = ({article}) => {
         return (
-            <div key={animal.id} className="card animal-card">
+            <div key={article.id} className="card article-card">
                 <div className="card-body">
-                    <h5 className="card-title">
-                        <img src={dog} alt="pupper" className="icon--dog" />
-                        {animal.name}
+                    <h4 className="card-title">{article.title}</h4>
+                    <p>{article.description}</p>
+                    <a href={article.url}>{article.url}</a>
+                    <p>{article.date}</p>
                         <button
-                            onClick={() => deleteArticle(article.id)}
-                            className="card-link">Discharge</button>
-                    </h5>
+                            className="card-link">Delete Article
+                        </button>
                     </div>
             </div>
         )
 }
 
-AnimalCard.propTypes = {
+ArticleCard.propTypes = {
     article: PropType.shape({
         title: PropType.string.isRequired,
         description: PropType.string.isRequired,
-        url: PropType.number.isRequired,
-        date: PropType.number.isRequired,
-        userId: PropType.number.is
+        url: PropType.string.isRequired,
+        date: PropType.string.isRequired,
+        userId: PropType.number.isRequired
         })
 }
 
-export default AnimalCard
+export default ArticleCard
