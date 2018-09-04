@@ -1,0 +1,62 @@
+.event-card {
+    background: linear-gradient(to bottom, #bfd4e6, #eef2f3);
+    color: black;
+    margin: 2em auto;
+    /* padding: 1em; */
+    width: 275px;
+    height: 275px;
+    transform: rotate(1deg);
+    border: black solid 3px;
+    box-shadow: 0px 0px 3px black inset;
+    outline: 3px solid #eef2f3;
+    outline-offset: 0px;
+
+}
+
+.event-date {
+    margin: 0;
+    padding: .5em;
+    font-size: 1em;
+    color: whitesmoke;
+    background: black;
+    text-align: center;
+}
+
+.event-day {
+    margin: 0;
+    padding: .5em;
+    padding-bottom: 0;
+    font-size: 2em;
+}
+
+.event-title {
+    margin: 0;
+    text-align: center;
+    padding: .3em;
+    font-family: 'Indie Flower', cursive;
+    color: navy;
+}
+
+.event-location {
+    margin: 0;
+    text-align: left;
+    padding: .3em;
+    font-family: 'Indie Flower', cursive;
+    color: navy;
+}
+
+.event-time {
+    margin: 0;
+    text-align: left;
+    color: navy;
+    padding: .3em;
+    font-family: 'Indie Flower', cursive;
+}
+
+.button-container {
+    margin: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: .3em;
+}
