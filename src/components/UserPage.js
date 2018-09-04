@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./userPage.css"
 // import ArticleList from "./articles/ArticleList";
 import EventList from "./events/EventList";
-// import TaskList from "./tasks/TaskList";
+import TaskList from "./tasks/TaskList";
 
 export default class UserPage extends Component {
     state = {
@@ -96,10 +96,10 @@ export default class UserPage extends Component {
                         this.state.eventShow === true &&
                         <EventList events={this.state.events}/>
                     }
-                    {/* {
+                    {
                         this.state.taskShow === true &&
                         <TaskList tasks={this.props.tasks}/>
-                    } */}
+                    }
                 </div>
                 <div className="right-container">
                     <h2>More Stuffs!</h2>
