@@ -3,6 +3,9 @@ import "./Messages.css"
 import MessageCard from "./MessagesCard"
 
 export default class MessagesList extends Component {
+   
+
+
     render () {
         return (
             <React.Fragment>
@@ -25,3 +28,19 @@ export default class MessagesList extends Component {
         )
     }
 }
+
+
+
+/*
+ state = {
+        messages: [],
+    }
+
+    componentDidMount(){
+        this.setState({
+            messages: this.props.messages
+        })
+    }
+
+
+*/

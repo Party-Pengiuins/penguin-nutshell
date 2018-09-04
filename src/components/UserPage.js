@@ -103,7 +103,7 @@ export default class UserPage extends Component {
                     }
                 </div>
                 <div className="right-container">
-                    <MessageList/>
+                    <MessageList messages={this.state.messages}/>
                 </div>
             </div>
         )
