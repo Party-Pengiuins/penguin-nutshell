@@ -34,7 +34,7 @@ export default class EventList extends Component {
                 }
                 {
                     this.props.events.map(event => {
-                        return <EventCard key={event.id} event={event} />
+                        return <EventCard key={event.id} event={event} removeEvent={this.props.removeEvent} />
                     })
                 }
             </div>

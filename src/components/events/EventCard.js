@@ -13,7 +13,7 @@ export default class EventCard extends Component {
                 <h5 className="event-time">{this.props.event.time}</h5>
                 <div className="button-container">
                     <button className="edit-event-button">Edit</button>
-                    <button className="delete-event-button">Delete</button>
+                    <button className="delete-event-button" onClick={()=>{this.props.removeEvent(this.props.event.id)}}>Delete</button>
                 </div>
             </div>
         )

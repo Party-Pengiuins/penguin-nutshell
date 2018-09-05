@@ -32,7 +32,7 @@ export default class UserPage extends Component {
         .then(tasks => {newState.tasks = tasks})
         .then(() => DataManager.getUserData("articles", localUser.id))
         .then(articles => {newState.articles = articles})
-        .then(() => DataManager.getUserData("messages", localUser.id))
+        .then(() => DataManager.getAll("messages"))
         .then(messages => {newState.messages = messages})
         .then(() => DataManager.getUserData("friends", localUser.id))
         .then(friends => {newState.friends = friends})
@@ -84,7 +84,7 @@ export default class UserPage extends Component {
     removeEvent = (id) => {
         let user = this.state.user
         DataManager.remove("events", id)
-        .then(() => {DataManager.getUserData("events", user.id)})
+        .then(() => DataManager.getUserData("events", user.id))
         .then((events) => {this.setState({events: events})})
     }
 
