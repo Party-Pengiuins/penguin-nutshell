@@ -98,7 +98,7 @@ export default class UserPage extends Component {
                     }
                     {
                         this.state.taskShow === true &&
-                        <TaskList tasks={this.props.tasks}/>
+                        <TaskList tasks={this.state.tasks}/>
                     }
                 </div>
                 <div className="right-container">
