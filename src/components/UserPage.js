@@ -1,10 +1,9 @@
 import { Component } from "react";
 import React from "react";
 import DataManager from "./modules/DataManager";
-// import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./userPage.css"
-// import ArticleList from "./articles/ArticleList";
+import ArticleList from "./articles/ArticleList";
 import EventList from "./events/EventList";
 import TaskList from "./tasks/TaskList";
 import { Tabs, Tab, TabList, Icon, TabLink } from "bloomer";
@@ -47,7 +46,7 @@ export default class UserPage extends Component {
         e.target.parentElement.parentElement.parentElement.children[2].classList.remove("is-active")
         e.target.parentElement.parentElement.classList.add("is-active")
         this.setState({
-            articleShow: false,
+            articleShow: true,
             eventShow: false,
             taskShow: false
         })
@@ -74,7 +73,21 @@ export default class UserPage extends Component {
             taskShow: true
         })
     }
+
+    addEvent = (object) => {
+        let user = this.state.user
+        DataManager.add("events", object)
+        .then(() => DataManager.getUserData("events", user.id))
+        .then((events) => {this.setState({events: events})})
+    }
     
+    removeEvent = (id) => {
+        let user = this.state.user
+        DataManager.remove("events", id)
+        .then(() => {DataManager.getUserData("events", user.id)})
+        .then((events) => {this.setState({events: events})})
+    }
+
     render(){
         return (
             <div className="content-container">
@@ -87,7 +100,7 @@ export default class UserPage extends Component {
                             <Tab isActive>
                                 <TabLink>
                                     <Icon isSize='small'><span className='fa fa-image' aria-hidden='true' /></Icon>
-                                    <span>Articles</span>
+                                    <span onClick={this.showArticles}>Articles</span>
                                 </TabLink>
                             </Tab>
                             <Tab>
@@ -104,13 +117,13 @@ export default class UserPage extends Component {
                             </Tab>
                         </TabList>
                     </Tabs>
-                    {/* {
+                    {
                         this.state.articleShow === true &&
                         <ArticleList articles={this.state.articles}/>
-                    } */}
+                    }
                     {
                         this.state.eventShow === true &&
-                        <EventList events={this.state.events}/>
+                        <EventList events={this.state.events} addEvent={this.addEvent} removeEvent={this.removeEvent} />
                     }
                     {
                         this.state.taskShow === true &&

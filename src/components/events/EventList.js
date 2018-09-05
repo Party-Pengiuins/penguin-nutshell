@@ -4,20 +4,22 @@ import EventAdd from "./EventAdd";
 
 export default class EventList extends Component {
     state = {
-        events: [],
+        
         addEvent: false
     }
 
-    componentDidMount(){
-        console.log("I got here")
+
+    renderEventForm = () => {
         this.setState({
-            events: this.props.events
+            addEvent: true
         })
     }
 
-    renderEventForm(){
-        this.setState({addEvent: true})
+    renderAddBtn = () => {
+        this.setState({addEvent: false})
     }
+
+
     
     render(){
         return (
@@ -28,10 +30,10 @@ export default class EventList extends Component {
                 }
                 {
                     this.state.addEvent === true &&
-                    <EventAdd />
+                    <EventAdd addEvent={this.props.addEvent} renderAddBtn={this.renderAddBtn} />
                 }
                 {
-                    this.state.events.map(event => {
+                    this.props.events.map(event => {
                         return <EventCard key={event.id} event={event} />
                     })
                 }
