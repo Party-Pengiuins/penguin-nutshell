@@ -11,8 +11,6 @@ import NavBar from "./nav/NavBar";
 
 export default class ApplicationViews extends Component {
 
-
-
     render() {
         return (
             <React.Fragment>
