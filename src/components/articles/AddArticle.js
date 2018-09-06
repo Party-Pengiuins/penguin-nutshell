@@ -30,8 +30,9 @@ export default class AddArticle extends Component {
         URL: this.state.URL,
         date: this.state.date,
         // not sure if this is how i'm going to be using this, adding it here for now
-        userId: 3
+        userId: this.props.user.id
     }
+    console.log(this.props.user.id)
     
     console.log(article)
     if((article.title === undefined) || (article.description === undefined) || (article.URL === undefined) || (article.date === undefined)){
@@ -45,7 +46,6 @@ export default class AddArticle extends Component {
             date: undefined
         })
 
-        // this.newTitle.value=""
         this.props.addArticle("articles", article)
     }
   }
@@ -67,7 +67,6 @@ export default class AddArticle extends Component {
             <FormGroup>
             <Label>Title:</Label>
             <Input id="title"
-                    // ref={(input) => this.newTitle = input}
                     className="form-control mb-2"
                     type="text"
                     onChange={this.handleFieldChange.bind(this)}
@@ -86,7 +85,7 @@ export default class AddArticle extends Component {
                     required=""
                     type="text"
                     onChange={this.handleFieldChange.bind(this)}
-                    placeholder="aaayyyyy new article URL" />
+                    placeholder="" />
             <Label>Date:</Label>
             <Input className="form-control mb-2"
                     onChange={this.handleFieldChange.bind(this)}

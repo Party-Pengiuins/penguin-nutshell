@@ -1,4 +1,6 @@
-
+/*
+    This module is for randomizing a title in the forms
+*/
 const stringArray = [
     "Today, this person did something cool!", 
     "You won't believe number 3!", 

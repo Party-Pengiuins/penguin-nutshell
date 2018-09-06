@@ -107,7 +107,7 @@ export default class UserPage extends Component {
                     </Pagination>
                     {
                         this.state.articleShow === true &&
-                        <ArticleList articles={this.state.articles} addArticle={this.addArticle} deleteArticle={this.deleteArticle}/>
+                        <ArticleList user={this.state.user.id} articles={this.state.articles} addArticle={this.addArticle} deleteArticle={this.deleteArticle}/>
                     }
                     {
                         this.state.eventShow === true &&
