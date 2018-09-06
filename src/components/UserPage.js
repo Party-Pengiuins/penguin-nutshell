@@ -80,17 +80,22 @@ export default class UserPage extends Component {
             taskShow: true
         })
     }
-    deleteTask = id => {
-        return fetch(`http://localhost:5002/tasks/${id}`, {
-            method: "DELETE"
-        })
-        .then(e => e.json())
-        .then(() => fetch(`http://localhost:5002/tasks`))
-        .then(e => e.json())
+    deleteTask = (string,task) => {
+            let localUser = JSON.parse(localStorage.getItem("user"));
+            DataManager.remove(string, task)
+            .then(() => DataManager.getUserData("tasks", localUser.id))
         .then(tasks => this.setState({
             tasks: tasks
         }))
     }
+    addTask = (string, task) => {
+    let localUser = JSON.parse(localStorage.getItem("user"));
+    DataManager.add(string, task)
+    .then(() => DataManager.getUserData("tasks", localUser.id))
+        .then(tasks => this.setState({
+        tasks: tasks
+    }))
+}
     render(){
         return (
             <div className="content-container">
@@ -125,7 +130,7 @@ export default class UserPage extends Component {
                     }
                     {
                         this.state.taskShow === true &&
-                        <TaskList deleteTask={this.deleteTask} tasks={this.state.tasks}/>
+                        <TaskList deleteTask={this.deleteTask} addTask={this.addTask} tasks={this.state.tasks}/>
                     }
                 </div>
                 <div className="right-container">

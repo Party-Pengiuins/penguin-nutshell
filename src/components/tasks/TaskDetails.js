@@ -12,7 +12,7 @@ const TaskCard = ({task, deleteTask}) => {
                         className="card-link task-complete">Task Complete
                     </button>
                     <button
-                    onClick={() => deleteTask(task.id)}
+                    onClick={() => deleteTask("tasks", task.id)}
                         className="card-link task-delete">Delete Task
                     </button>
                     <button

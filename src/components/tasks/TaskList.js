@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import TaskCard from "./TaskDetails"
+import TaskForm from "./TaskForm"
 export default class TaskList extends Component {   
-    componentDidMount(){
-        console.log("I'm a real boy now")
-    }
     render(){
         return (
             <div>
@@ -14,7 +12,7 @@ export default class TaskList extends Component {
                     )
                 }
             </div>
-            <button>Add New Task</button>
+            <TaskForm addTask={this.props.addTask} {...this.props}/>
             </div>
         )
     }
