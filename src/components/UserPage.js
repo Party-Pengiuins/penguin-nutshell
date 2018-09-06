@@ -9,6 +9,7 @@ import TaskList from "./tasks/TaskList";
 import { Tabs, Tab, TabList, Icon, TabLink } from "bloomer";
 import 'bulma/css/bulma.css'
 import ProfileCard from "./profile/ProfileCard";
+import FriendsList from "./friends/FriendsList";
 
 export default class UserPage extends Component {
     state = {
@@ -18,6 +19,7 @@ export default class UserPage extends Component {
         articles: [],
         messages: [],
         friends: [],
+        allUsers: [],
         articleShow: true,
         eventShow: false,
         taskShow: false
@@ -35,6 +37,8 @@ export default class UserPage extends Component {
         .then(articles => {newState.articles = articles})
         .then(() => DataManager.getAll("messages"))
         .then(messages => {newState.messages = messages})
+        .then(() => DataManager.getAll("users"))
+        .then(users => {newState.allUsers = users})
         .then(() => DataManager.getUserData("friends", localUser.id))
         .then(friends => {newState.friends = friends})
         .then(() => {
@@ -121,11 +125,16 @@ export default class UserPage extends Component {
         })
     }
 
+    saveFriend = (object) => {
+        return DataManager.add("friends", object)
+        .then(() => DataManager.getUserData("friends", this.state.user.id))
+        .then((friends) => {this.setState({friends: friends})})
+    }
+
     render(){
         return (
             <div className="content-container">
                 <div className="left-container">
-                    <h2>Stuffs!</h2>
                     <ProfileCard user={this.state.user} editProfile={this.editProfile} />
                 </div>
                 <div className="mid-container">
@@ -166,6 +175,7 @@ export default class UserPage extends Component {
                 </div>
                 <div className="right-container">
                     <h2>More Stuffs!</h2>
+                    <FriendsList friends={this.state.friends} allUsers={this.state.allUsers} saveFriend={this.saveFriend} user={this.state.user} />
                 </div>
             </div>
         )

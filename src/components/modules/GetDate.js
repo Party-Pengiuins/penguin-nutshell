@@ -1,4 +1,6 @@
-function getTime() {
+
+const DateMod = {}
+DateMod.getTime = () => {
     let time = "";
     let currentTime = new Date()
     let hours = currentTime.getHours()
@@ -19,7 +21,7 @@ function getTime() {
     return time;
 }
 
-function getDate(){
+DateMod.getDate = () => {
     let date = new Date();
     let dd = date.getDate();
     let mm = date.getMonth() + 1;
@@ -30,8 +32,8 @@ function getDate(){
     if( mm < 10 ) {
         mm = "0" + mm
     };
-    date = mm + "/" + dd + "/" + yyyy + " at " + getTime();
+    date = mm + "/" + dd + "/" + yyyy + " at " + DateMod.getTime();
     return date;
 }
 
-export default getDate;
+export default DateMod;
