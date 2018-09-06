@@ -69,8 +69,8 @@ export default class EditTask extends Component {
             <Input id="title"
                     className="form-control mb-2"
                     type="text"
-                    onChange={this.handleFieldChange.bind(this)}
-                    placeholder="Title" />
+                    defaultValue={this.props.taskTitle}
+                    onChange={this.handleFieldChange.bind(this)}/>
             <Label for="description">Synopsis:</Label>
             <Input id="description"
                     className="form-control mb-2"
@@ -78,13 +78,14 @@ export default class EditTask extends Component {
                     required=""
                     name="text"
                     onChange={this.handleFieldChange.bind(this)}
-                    placeholder="Description" />
+                    defaultValue={this.props.taskDescription}/>
             <Label>Date:</Label>
             <Input className="form-control mb-2"
                     onChange={this.handleFieldChange.bind(this)}
                     required=""
                     id="date"
                     type="date"
+                    defaultValue={this.props.taskDate}
                     />
             </FormGroup>
           </ModalBody>

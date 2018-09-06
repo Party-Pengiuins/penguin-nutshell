@@ -19,7 +19,7 @@ export default class TaskCard extends Component {
                     onClick={() => this.props.deleteTask("tasks", this.props.task.id)}
                         className="card-link task-delete">Delete Task
                     </button>
-                    <EditTask taskId={this.props.task.id} editTask={this.props.editTask}/>
+                    <EditTask taskId={this.props.task.id} taskDescription={this.props.task.description} taskDate={this.props.task.date} taskTitle={this.props.task.title} editTask={this.props.editTask}/>
                 </div>
         </div>
         )
