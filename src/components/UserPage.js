@@ -63,7 +63,17 @@ export default class UserPage extends Component {
             taskShow: true
         })
     }
-    
+    deleteTask = id => {
+        return fetch(`http://localhost:5002/tasks/${id}`, {
+            method: "DELETE"
+        })
+        .then(e => e.json())
+        .then(() => fetch(`http://localhost:5002/tasks`))
+        .then(e => e.json())
+        .then(tasks => this.setState({
+            tasks: tasks
+        }))
+    }
     render(){
         return (
             <div className="content-container">
@@ -98,7 +108,7 @@ export default class UserPage extends Component {
                     }
                     {
                         this.state.taskShow === true &&
-                        <TaskList tasks={this.state.tasks}/>
+                        <TaskList deleteTask={this.deleteTask} tasks={this.state.tasks}/>
                     }
                 </div>
                 <div className="right-container">
