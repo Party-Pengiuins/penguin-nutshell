@@ -97,6 +97,12 @@ export default class UserPage extends Component {
         .then(() => DataManager.getUnfinishedTasks("tasks", localUser.id))
         .then((tasks) => {this.setState({tasks: tasks})})
     }
+    editTask = (id, object) => {
+        let localUser = JSON.parse(localStorage.getItem("user"));
+        DataManager.edit("tasks", id, object)
+        .then(() => DataManager.getUnfinishedTasks("tasks", localUser.id))
+        .then((tasks) => {this.setState({tasks: tasks})})
+    }
     deleteTask = (string,task) => {
             let localUser = JSON.parse(localStorage.getItem("user"));
             DataManager.remove(string, task)
