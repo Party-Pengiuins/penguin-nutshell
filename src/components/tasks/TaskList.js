@@ -1,12 +1,18 @@
 import React, { Component } from "react";
+import TaskCard from "./TaskDetails"
+import TaskForm from "./TaskForm"
 export default class TaskList extends Component {   
-    componentDidMount(){
-        console.log("This is my swamp now")
-    } 
     render(){
         return (
             <div>
-            <h1>Hello</h1>
+            <div>
+            {
+                    this.props.tasks.map(task =>
+                        <TaskCard key={task.id} task={task} deleteTask={this.props.deleteTask} {...this.props} />
+                    )
+                }
+            </div>
+            <TaskForm addTask={this.props.addTask} {...this.props}/>
             </div>
         )
     }

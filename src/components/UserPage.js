@@ -91,6 +91,22 @@ export default class UserPage extends Component {
             taskShow: true
         })
     }
+    deleteTask = (string,task) => {
+            let localUser = JSON.parse(localStorage.getItem("user"));
+            DataManager.remove(string, task)
+            .then(() => DataManager.getUserData("tasks", localUser.id))
+        .then(tasks => this.setState({
+            tasks: tasks
+        }))
+    }
+    addTask = (string, task) => {
+    let localUser = JSON.parse(localStorage.getItem("user"));
+    DataManager.add(string, task)
+    .then(() => DataManager.getUserData("tasks", localUser.id))
+        .then(tasks => this.setState({
+        tasks: tasks
+    }))
+}
 
     addEvent = (object) => {
         let user = this.state.user
@@ -161,7 +177,7 @@ export default class UserPage extends Component {
                     }
                     {
                         this.state.taskShow === true &&
-                        <TaskList tasks={this.props.tasks} />
+                        <TaskList deleteTask={this.deleteTask} addTask={this.addTask} tasks={this.state.tasks}/>
                     }
                 </div>
                 <div className="right-container">
