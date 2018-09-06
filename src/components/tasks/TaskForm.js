@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, FormGroup } from 'reactstrap';
-
+import "./tasks.css"
 export default class AddTask extends Component {
   constructor(props) {
     super(props);
@@ -61,6 +61,7 @@ export default class AddTask extends Component {
       <React.Fragment>
         <Button color="success" onClick={this.toggle}>Add New Task</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        <div className="task-modal">
           <ModalHeader toggle={this.toggle}>Add New Task</ModalHeader>
           <ModalBody>
             <FormGroup>
@@ -91,6 +92,7 @@ export default class AddTask extends Component {
             <Button color="success" type="submit" onClick={this.createNewTask}>Add</Button>
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
+          </div>
         </Modal>
       </React.Fragment>
     );
