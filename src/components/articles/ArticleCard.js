@@ -8,7 +8,7 @@ const ArticleCard = ({article, deleteArticle}) => {
                 <div className="card-body">
                     <h4 className="card-title">{article.title}</h4>
                     <p>{article.description}</p>
-                    <a href={article.URL}>{article.title}</a>
+                    <a  href={`${article.URL}`}>{article.title}</a>
                     <p>{article.date}</p>
                         <button
                             onClick={() => deleteArticle("articles", article.id)}
