@@ -8,6 +8,7 @@ import EventList from "./events/EventList";
 import TaskList from "./tasks/TaskList";
 import { Tabs, Tab, TabList, Icon, TabLink } from "bloomer";
 import 'bulma/css/bulma.css'
+import ProfileCard from "./profile/ProfileCard";
 
 export default class UserPage extends Component {
     state = {
@@ -88,11 +89,27 @@ export default class UserPage extends Component {
         .then((events) => {this.setState({events: events})})
     }
 
+    editEvent = (id, object) => {
+        DataManager.edit("events", id, object)
+        .then(() => DataManager.getUserData("events", this.state.user.id))
+        .then((events) => {this.setState({events: events})})
+    }
+
+    editProfile = (object) => {
+        return DataManager.edit("users", this.state.user.id, object)
+        .then(() => DataManager.get("users", JSON.parse(localStorage.getItem("user")).id))
+        .then((user) => {
+            localStorage.setItem("user", JSON.stringify(user));
+            this.setState({user: user})
+        })
+    }
+
     render(){
         return (
             <div className="content-container">
                 <div className="left-container">
                     <h2>Stuffs!</h2>
+                    <ProfileCard user={this.state.user} editProfile={this.editProfile} />
                 </div>
                 <div className="mid-container">
                     <Tabs>
@@ -119,15 +136,15 @@ export default class UserPage extends Component {
                     </Tabs>
                     {
                         this.state.articleShow === true &&
-                        <ArticleList articles={this.state.articles}/>
+                        <ArticleList articles={this.state.articles} />
                     }
                     {
                         this.state.eventShow === true &&
-                        <EventList events={this.state.events} addEvent={this.addEvent} removeEvent={this.removeEvent} />
+                        <EventList events={this.state.events} addEvent={this.addEvent} removeEvent={this.removeEvent} editEvent={this.editEvent} />
                     }
                     {
                         this.state.taskShow === true &&
-                        <TaskList tasks={this.props.tasks}/>
+                        <TaskList tasks={this.props.tasks} />
                     }
                 </div>
                 <div className="right-container">

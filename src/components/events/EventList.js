@@ -4,7 +4,6 @@ import EventAdd from "./EventAdd";
 
 export default class EventList extends Component {
     state = {
-        
         addEvent: false
     }
 
@@ -34,7 +33,7 @@ export default class EventList extends Component {
                 }
                 {
                     this.props.events.map(event => {
-                        return <EventCard key={event.id} event={event} removeEvent={this.props.removeEvent} />
+                        return <EventCard key={event.id} event={event} removeEvent={this.props.removeEvent} editEvent={this.props.editEvent} />
                     })
                 }
             </div>

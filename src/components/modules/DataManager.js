@@ -19,6 +19,11 @@ export default Object.create(null, {
             .then(res => res.json())
         }
     },
+    getUserDataSorted: {
+        value: (key, userId) => {
+            return fetch(`${remoteURL}/${key}?userId=${userId}&_sort=id&_order=desc`)
+        }
+    },
     remove: {
         value: (key, id) => {
             return fetch(`${remoteURL}/${key}/${id}`, {
