@@ -8,7 +8,7 @@ export default class TaskList extends Component {
             <div>
             {
                     this.props.tasks.map(task =>
-                        <TaskCard key={task.id} task={task} deleteTask={this.props.deleteTask} {...this.props} />
+                        <TaskCard key={task.id} task={task} taskComplete={this.props.taskComplete} deleteTask={this.props.deleteTask} {...this.props} />
                     )
                 }
             </div>

@@ -55,5 +55,11 @@ export default Object.create(null, {
             })
             .then(result => result.json())
         }
-    }
-})
+    },
+    getUnfinishedTasks: {
+        value: (key, userId) => {
+            return fetch(`${remoteURL}/${key}/?userId=${userId}&completed=false`)
+            .then(result => result.json())
+            }
+
+}})
