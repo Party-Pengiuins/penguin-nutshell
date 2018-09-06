@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { Route, Redirect } from "react-router-dom";
 import UserPage from "./UserPage";
 import NavBar from "./nav/NavBar";
+import FriendPage from "./FriendPage";
 
 
 
@@ -19,7 +20,10 @@ export default class ApplicationViews extends Component {
                     <div className="viewArea">
                         <NavBar />
                         <Route exact path="/userpage" render={(props) => {
-                                return <UserPage />
+                                return <UserPage {...props} />
+                            }} />
+                        <Route exact path="/friends/friendpage/:username" render={(props) => {
+                                return <FriendPage {...props} />
                             }} />
                     </div>
                 }

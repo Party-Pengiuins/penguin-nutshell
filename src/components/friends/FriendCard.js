@@ -12,7 +12,7 @@ export default class FriendCard extends Component {
     
     render(){
         return (
-            <div><span>{this.state.friend.username}</span><button>View Profile</button><button onClick={() => this.props.removeFriend(this.props.friend.id)}>Remove</button></div>
+            <div><span>{this.state.friend.username}</span><button onClick={() => {this.props.history.push(`/friends/friendpage/${this.state.friend.username}`)}}>View Profile</button><button onClick={() => this.props.removeFriend(this.props.friend.id)}>Remove</button></div>
         )
     }
 }
