@@ -21,13 +21,11 @@ export default class EventEditModal extends Component {
     }
 
     handleSave = () => {
-        console.log("edit initiated")
         this.props.editEvent(this.state.event.id, this.state.event);
         this.toggle();
     }
     
     toggle = (e) => {
-        console.log(e.target.parentElement)
         this.setState({
             modal: !this.state.modal
         });
