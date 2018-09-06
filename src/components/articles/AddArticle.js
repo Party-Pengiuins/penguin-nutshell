@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, FormGroup } from 'reactstrap';
 import "./articles.css"
+import GetDate from '../modules/GetDate.js'
 
 export default class AddArticle extends Component {
     constructor(props) {
@@ -55,7 +56,7 @@ export default class AddArticle extends Component {
     render() {
         return (
             <React.Fragment>
-                <Button color="success" onClick={this.toggle}>Add New Article</Button>
+                <Button color="success" id="new-article-btn" onClick={this.toggle}>Add New Article</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <div className="madi-modal">
                         <ModalHeader toggle={this.toggle}>Add New Article</ModalHeader>

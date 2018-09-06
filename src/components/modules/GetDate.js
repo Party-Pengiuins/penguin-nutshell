@@ -1,4 +1,4 @@
-DateMod = {}
+const DateMod = {}
 DateMod.getTime = () => {
     let time = "";
     let currentTime = new Date()
