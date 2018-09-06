@@ -131,6 +131,12 @@ export default class UserPage extends Component {
         .then((friends) => {this.setState({friends: friends})})
     }
 
+    removeFriend = (object) => {
+        return DataManager.remove("friends", object)
+        .then(() => DataManager.getUserData("friends", this.state.user.id))
+        .then((friends) => {this.setState({friends: friends})})
+    }
+
     render(){
         return (
             <div className="content-container">
@@ -175,7 +181,7 @@ export default class UserPage extends Component {
                 </div>
                 <div className="right-container">
                     <h2>More Stuffs!</h2>
-                    <FriendsList friends={this.state.friends} allUsers={this.state.allUsers} saveFriend={this.saveFriend} user={this.state.user} />
+                    <FriendsList friends={this.state.friends} allUsers={this.state.allUsers} saveFriend={this.saveFriend} removeFriend={this.removeFriend} user={this.state.user} />
                 </div>
             </div>
         )
