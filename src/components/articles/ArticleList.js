@@ -8,7 +8,7 @@ export default class ArticleList extends Component {
             <React.Fragment>
                 <div className="articles-list-container">
                     <div className="add-new-article-btn">
-                    <AddArticle user={this.props.user} addArticle={this.props.addArticle} />
+                    <AddArticle user={this.props.user} addArticle={this.props.addArticle}/>
                     </div>
                 <section className="article-cards-container">
                 {

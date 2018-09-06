@@ -1,12 +1,14 @@
 import { Component } from "react";
 import React from "react";
 import DataManager from "./modules/DataManager";
-import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./userPage.css"
 import ArticleList from "./articles/ArticleList";
 import EventList from "./events/EventList";
 import TaskList from "./tasks/TaskList";
+import { Tabs, Tab, TabList, Icon, TabLink } from "bloomer";
+import 'bulma/css/bulma.css'
+import ProfileCard from "./profile/ProfileCard";
 
 export default class UserPage extends Component {
     state = {
@@ -31,7 +33,7 @@ export default class UserPage extends Component {
         .then(tasks => {newState.tasks = tasks})
         .then(() => DataManager.getUserData("articles", localUser.id, "id", "asc"))
         .then(articles => {newState.articles = articles})
-        .then(() => DataManager.getUserData("messages", localUser.id))
+        .then(() => DataManager.getAll("messages"))
         .then(messages => {newState.messages = messages})
         .then(() => DataManager.getUserData("friends", localUser.id))
         .then(friends => {newState.friends = friends})
@@ -40,7 +42,10 @@ export default class UserPage extends Component {
         })
     }
 
-    showArticles = () => {
+    showArticles = (e) => {
+        e.target.parentElement.parentElement.parentElement.children[1].classList.remove("is-active")
+        e.target.parentElement.parentElement.parentElement.children[2].classList.remove("is-active")
+        e.target.parentElement.parentElement.classList.add("is-active")
         this.setState({
             articleShow: true,
             eventShow: false,
@@ -65,57 +70,98 @@ export default class UserPage extends Component {
 
     }
     
-    showEvents = () => {
+    showEvents = (e) => {
         console.log("events clicked")
+        e.target.parentElement.parentElement.parentElement.children[0].classList.remove("is-active")
+        e.target.parentElement.parentElement.parentElement.children[2].classList.remove("is-active")
+        e.target.parentElement.parentElement.classList.add("is-active")
         this.setState({
             articleShow: false,
             eventShow: true,
             taskShow: false
         })
     }
-    showTasks = () => {
+    showTasks = (e) => {
+        e.target.parentElement.parentElement.parentElement.children[0].classList.remove("is-active")
+        e.target.parentElement.parentElement.parentElement.children[1].classList.remove("is-active")
+        e.target.parentElement.parentElement.classList.add("is-active")
         this.setState({
             articleShow: false,
             eventShow: false,
             taskShow: true
         })
     }
+
+    addEvent = (object) => {
+        let user = this.state.user
+        DataManager.add("events", object)
+        .then(() => DataManager.getUserData("events", user.id))
+        .then((events) => {this.setState({events: events})})
+    }
     
+    removeEvent = (id) => {
+        let user = this.state.user
+        DataManager.remove("events", id)
+        .then(() => DataManager.getUserData("events", user.id))
+        .then((events) => {this.setState({events: events})})
+    }
+
+    editEvent = (id, object) => {
+        DataManager.edit("events", id, object)
+        .then(() => DataManager.getUserData("events", this.state.user.id))
+        .then((events) => {this.setState({events: events})})
+    }
+
+    editProfile = (object) => {
+        return DataManager.edit("users", this.state.user.id, object)
+        .then(() => DataManager.get("users", JSON.parse(localStorage.getItem("user")).id))
+        .then((user) => {
+            localStorage.setItem("user", JSON.stringify(user));
+            this.setState({user: user})
+        })
+    }
+
     render(){
         return (
             <div className="content-container">
                 <div className="left-container">
                     <h2>Stuffs!</h2>
+                    <ProfileCard user={this.state.user} editProfile={this.editProfile} />
                 </div>
                 <div className="mid-container">
-                    <Pagination size="md" aria-label="Page navigation example">
-                        <PaginationItem>
-                            <PaginationLink previous href="#" />
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink href="#" onClick={this.showArticles}>Articles</PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink href="#" onClick={this.showEvents}>Events</PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink href="#" onClick={this.showTasks}>Tasks</PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink next href="#" />
-                        </PaginationItem>
-                    </Pagination>
+                    <Tabs>
+                        <TabList>
+                            <Tab isActive>
+                                <TabLink>
+                                    <Icon isSize='small'><span className='fa fa-image' aria-hidden='true' /></Icon>
+                                    <span onClick={this.showArticles}>Articles</span>
+                                </TabLink>
+                            </Tab>
+                            <Tab>
+                                <TabLink>
+                                    <Icon isSize='small'><span className='fa fa-music' aria-hidden='true' /></Icon>
+                                    <span onClick={this.showEvents}>Events</span>
+                                </TabLink>
+                            </Tab>
+                            <Tab>
+                                <TabLink>
+                                    <Icon isSize='small'><span className='fa fa-film' aria-hidden='true' /></Icon>
+                                    <span onClick={this.showTasks}>Tasks</span>
+                                </TabLink>
+                            </Tab>
+                        </TabList>
+                    </Tabs>
                     {
                         this.state.articleShow === true &&
-                        <ArticleList user={this.state.user.id} articles={this.state.articles} addArticle={this.addArticle} deleteArticle={this.deleteArticle}/>
+                        <ArticleList user={this.state.user} articles={this.state.articles} addArticle={this.addArticle} deleteArticle={this.deleteArticle}/>
                     }
                     {
                         this.state.eventShow === true &&
-                        <EventList events={this.state.events}/>
+                        <EventList events={this.state.events} addEvent={this.addEvent} removeEvent={this.removeEvent} editEvent={this.editEvent} />
                     }
                     {
                         this.state.taskShow === true &&
-                        <TaskList tasks={this.props.tasks}/>
+                        <TaskList tasks={this.props.tasks} />
                     }
                 </div>
                 <div className="right-container">
