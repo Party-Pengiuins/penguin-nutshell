@@ -31,7 +31,7 @@ export default class UserPage extends Component {
         .then(events => {newState.events = events})
         .then(() => DataManager.getUserData("tasks", localUser.id))
         .then(tasks => {newState.tasks = tasks})
-        .then(() => DataManager.getUserData("articles", localUser.id))
+        .then(() => DataManager.getUserData("articles", localUser.id, "id", "asc"))
         .then(articles => {newState.articles = articles})
         .then(() => DataManager.getAll("messages"))
         .then(messages => {newState.messages = messages})
@@ -51,6 +51,23 @@ export default class UserPage extends Component {
             eventShow: false,
             taskShow: false
         })
+    }
+    addArticle = (string, article) => {
+        let localUser = JSON.parse(localStorage.getItem("user"));
+        DataManager.add(string, article)
+        .then(() => DataManager.getUserData("articles", localUser.id))
+        .then(articles => this.setState({
+        articles: articles
+        }))
+    }
+    deleteArticle = (string, article) => {
+        let localUser = JSON.parse(localStorage.getItem("user"));
+        DataManager.remove(string, article)
+        .then(() => DataManager.getUserData("articles", localUser.id))
+        .then(articles => this.setState({
+            articles: articles
+        }))
+
     }
     
     showEvents = (e) => {
@@ -136,7 +153,11 @@ export default class UserPage extends Component {
                     </Tabs>
                     {
                         this.state.articleShow === true &&
+<<<<<<< HEAD
                         <ArticleList articles={this.state.articles} />
+=======
+                        <ArticleList articles={this.state.articles} addArticle={this.addArticle} deleteArticle={this.deleteArticle}/>
+>>>>>>> master
                     }
                     {
                         this.state.eventShow === true &&
