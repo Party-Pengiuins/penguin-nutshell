@@ -153,11 +153,7 @@ export default class UserPage extends Component {
                     </Tabs>
                     {
                         this.state.articleShow === true &&
-<<<<<<< HEAD
-                        <ArticleList articles={this.state.articles} />
-=======
-                        <ArticleList articles={this.state.articles} addArticle={this.addArticle} deleteArticle={this.deleteArticle}/>
->>>>>>> master
+                        <ArticleList user={this.state.user} articles={this.state.articles} addArticle={this.addArticle} deleteArticle={this.deleteArticle}/>
                     }
                     {
                         this.state.eventShow === true &&

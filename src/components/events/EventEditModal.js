@@ -26,7 +26,8 @@ export default class EventEditModal extends Component {
         this.toggle();
     }
     
-    toggle() {
+    toggle = (e) => {
+        console.log(e.target.parentElement)
         this.setState({
             modal: !this.state.modal
         });
