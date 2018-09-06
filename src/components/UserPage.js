@@ -29,7 +29,7 @@ export default class UserPage extends Component {
         newState.user = localUser;
         DataManager.getUserData("events", localUser.id)
         .then(events => {newState.events = events})
-        .then(() => DataManager.getUserData("tasks", localUser.id))
+        .then(() => DataManager.getUnfinishedTasks("tasks", localUser.id))
         .then(tasks => {newState.tasks = tasks})
         .then(() => DataManager.getUserData("articles", localUser.id, "id", "asc"))
         .then(articles => {newState.articles = articles})
@@ -91,10 +91,16 @@ export default class UserPage extends Component {
             taskShow: true
         })
     }
+    taskComplete = (id, object) => {
+        let localUser = JSON.parse(localStorage.getItem("user"));
+        DataManager.edit("tasks", id, object)
+        .then(() => DataManager.getUnfinishedTasks("tasks", localUser.id))
+        .then((tasks) => {this.setState({tasks: tasks})})
+    }
     deleteTask = (string,task) => {
             let localUser = JSON.parse(localStorage.getItem("user"));
             DataManager.remove(string, task)
-            .then(() => DataManager.getUserData("tasks", localUser.id))
+            .then(() => DataManager.getUnfinishedTasks("tasks", localUser.id))
         .then(tasks => this.setState({
             tasks: tasks
         }))
@@ -102,7 +108,7 @@ export default class UserPage extends Component {
     addTask = (string, task) => {
     let localUser = JSON.parse(localStorage.getItem("user"));
     DataManager.add(string, task)
-    .then(() => DataManager.getUserData("tasks", localUser.id))
+    .then(() => DataManager.getUnfinishedTasks("tasks", localUser.id))
         .then(tasks => this.setState({
         tasks: tasks
     }))
@@ -177,7 +183,7 @@ export default class UserPage extends Component {
                     }
                     {
                         this.state.taskShow === true &&
-                        <TaskList deleteTask={this.deleteTask} addTask={this.addTask} tasks={this.state.tasks}/>
+                        <TaskList deleteTask={this.deleteTask} addTask={this.addTask} taskComplete={this.taskComplete} tasks={this.state.tasks}/>
                     }
                 </div>
                 <div className="right-container">
