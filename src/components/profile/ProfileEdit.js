@@ -9,7 +9,6 @@ export default class ProfileEdit extends Component {
     }
     
     handleFieldChange = evt => {
-        console.log(this.state)
         const stateToChange = {}
         stateToChange[evt.target.id.split("-")[1]] = evt.target.value
         this.setState(stateToChange)
