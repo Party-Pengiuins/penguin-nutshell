@@ -45,7 +45,7 @@ export default class EditTask extends Component {
         })
 
         // this.newTitle.value=""
-        this.props.editTask("tasks", task)
+        this.props.editTask(this.props.taskId, task)
     }
   }
 
@@ -59,10 +59,10 @@ export default class EditTask extends Component {
   render() {
     return (
       <React.Fragment>
-        <Button color="success" onClick={this.toggle}>Add New Task</Button>
+        <Button color="success" onClick={this.toggle}>Edit Task</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
         <div className="task-modal">
-          <ModalHeader toggle={this.toggle}>Add New Task</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Edit Task</ModalHeader>
           <ModalBody>
             <FormGroup>
             <Label>Title:</Label>
@@ -89,7 +89,7 @@ export default class EditTask extends Component {
             </FormGroup>
           </ModalBody>
           <ModalFooter>
-            <Button color="success" type="submit" onClick={this.createNewTask}>Add</Button>
+            <Button color="success" type="submit" onClick={this.createNewTask}>Confim Edit</Button>
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
           </div>
