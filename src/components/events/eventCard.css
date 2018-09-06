@@ -37,6 +37,14 @@
     color: navy;
 }
 
+.event-description {
+    margin: 0;
+    text-align: left;
+    padding: .3em;
+    font-family: 'Indie Flower', cursive;
+    color: navy;
+}
+
 .event-location {
     margin: 0;
     text-align: left;
