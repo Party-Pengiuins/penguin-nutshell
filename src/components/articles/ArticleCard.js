@@ -23,7 +23,7 @@ ArticleCard.propTypes = {
     article: PropType.shape({
         title: PropType.string.isRequired,
         description: PropType.string.isRequired,
-        URL: PropType.string.isRequired,
+        URL: PropType.string,
         date: PropType.string.isRequired,
         userId: PropType.number.isRequired
         })

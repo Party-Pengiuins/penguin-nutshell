@@ -17,11 +17,9 @@ export default class MessageCard extends Component {
                         <p className = "card-message" >{this.props.message.content}</p>
                         
                         <h4>{this.props.allUsers.find(u => u.id === this.props.message.userId).username}</h4>
-                        <a className = "card-button" href="#"
-                            onClick={() => this.props.deleteMessage(this.props.message.id)}>Delete </a>
-                            
-                             <MessagesEdit editMessage ={this.props.editMessage} message = {this.props.message}/>
-
+                        <button className="card-button"
+                            onClick={() => this.props.deleteMessage(this.props.message.id)}>Delete </button>
+                        <MessagesEdit editMessage ={this.props.editMessage} message = {this.props.message}/>
                     </div>
                 }
                 {
