@@ -22,7 +22,7 @@ export default class EventList extends Component {
     
     render(){
         return (
-            <div>
+            <div className="event-list-container">
                 {
                     this.state.addEvent === false &&
                     <button onClick={this.renderEventForm}>Add Event</button>
