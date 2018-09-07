@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, FormGroup } from 'reactstrap';
 import "./articles.css"
+import DateMod from '../modules/GetDate.js'
 
 export default class AddArticle extends Component {
     constructor(props) {
@@ -9,8 +10,7 @@ export default class AddArticle extends Component {
             modal: false,
             title: undefined,
             description: undefined,
-            URL: undefined,
-            date: undefined
+            URL: undefined
         };
         this.toggle = this.toggle.bind(this);
     }
@@ -28,7 +28,7 @@ export default class AddArticle extends Component {
             title: this.state.title,
             description: this.state.description,
             URL: this.state.URL,
-            date: this.state.date,
+            date: DateMod.getDate(),
             userId: this.props.user.id
         }
         if((article.title === undefined) || (article.description === undefined) || (article.URL === undefined) || (article.date === undefined)){
@@ -38,8 +38,7 @@ export default class AddArticle extends Component {
                 modal: !this.state.modal,
                 title: undefined,
                 description: undefined,
-                URL: undefined,
-                date: undefined
+                URL: undefined
             })
             this.props.addArticle("articles", article)
         }
@@ -55,7 +54,7 @@ export default class AddArticle extends Component {
     render() {
         return (
             <React.Fragment>
-                <Button color="success" onClick={this.toggle}>Add New Article</Button>
+                <Button color="success" id="new-article-btn" onClick={this.toggle}>Add New Article</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <div className="madi-modal">
                         <ModalHeader toggle={this.toggle}>Add New Article</ModalHeader>
@@ -65,7 +64,7 @@ export default class AddArticle extends Component {
                                 <Input id="title"
                                       className="form-control mb-2"
                                       type="text"
-                                      onChange={this.handleFieldChange.bind(this)}
+                                      onChange={this.handleFieldChange}
                                       placeholder="Title" />
                                 <Label for="description">Synopsis:</Label>
                                 <Input id="description"
@@ -73,21 +72,15 @@ export default class AddArticle extends Component {
                                       type="textarea"
                                       required=""
                                       name="text"
-                                      onChange={this.handleFieldChange.bind(this)}
+                                      onChange={this.handleFieldChange}
                                       placeholder="Description" />
                                 <Label>URL:</Label>
                                 <Input id="URL"
                                         className="form-control mb-2"
                                         required=""
                                         type="text"
-                                        onChange={this.handleFieldChange.bind(this)}
-                                        placeholder="aaayyyyy new article URL" />
-                                <Label>Date:</Label>
-                                <Input className="form-control mb-2"
-                                        onChange={this.handleFieldChange.bind(this)}
-                                        required=""
-                                        id="date"
-                                        type="date" />
+                                        onChange={this.handleFieldChange}
+                                        placeholder="Paste your URL here" />
                             </FormGroup>
                         </ModalBody>
                         <ModalFooter>

@@ -62,17 +62,15 @@ export default class UserPage extends Component {
         })
     }
     addArticle = (string, article) => {
-        let localUser = JSON.parse(sessionStorage.getItem("user"));
         DataManager.add(string, article)
-        .then(() => DataManager.getUserData("articles", localUser.id))
+        .then(() => DataManager.getUserData("articles", this.state.user.id))
         .then(articles => this.setState({
         articles: articles
         }))
     }
     deleteArticle = (string, article) => {
-        let localUser = JSON.parse(sessionStorage.getItem("user"));
         DataManager.remove(string, article)
-        .then(() => DataManager.getUserData("articles", localUser.id))
+        .then(() => DataManager.getUserData("articles", this.state.user.id))
         .then(articles => this.setState({
             articles: articles
         }))
