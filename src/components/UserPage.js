@@ -3,9 +3,11 @@ import React from "react";
 import DataManager from "./modules/DataManager";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./userPage.css"
+// import ArticleList from "./articles/ArticleList";
+import TaskList from "./tasks/TaskList"
 import ArticleList from "./articles/ArticleList";
 import EventList from "./events/EventList";
-import TaskList from "./tasks/TaskList";
+import MessageList from "./messages/MessagesList";
 import { Tabs, Tab, TabList, Icon, TabLink } from "bloomer";
 import 'bulma/css/bulma.css'
 import ProfileCard from "./profile/ProfileCard";
@@ -13,6 +15,7 @@ import ProfileCard from "./profile/ProfileCard";
 export default class UserPage extends Component {
     state = {
         user: {},
+        allUsers: [],
         events: [],
         tasks: [],
         articles: [],
@@ -29,12 +32,14 @@ export default class UserPage extends Component {
         newState.user = localUser;
         DataManager.getUserData("events", localUser.id)
         .then(events => {newState.events = events})
-        .then(() => DataManager.getUserData("tasks", localUser.id))
+        .then(() => DataManager.getUnfinishedTasks("tasks", localUser.id))
         .then(tasks => {newState.tasks = tasks})
         .then(() => DataManager.getUserData("articles", localUser.id, "id", "asc"))
         .then(articles => {newState.articles = articles})
         .then(() => DataManager.getAll("messages"))
         .then(messages => {newState.messages = messages})
+        .then(() => DataManager.getAll("users"))
+        .then(users => {newState.allUsers = users})
         .then(() => DataManager.getUserData("friends", localUser.id))
         .then(friends => {newState.friends = friends})
         .then(() => {
@@ -91,10 +96,45 @@ export default class UserPage extends Component {
             taskShow: true
         })
     }
+
+
+    deleteMessage = (id) => {
+        DataManager.remove("messages", id).then(() => {
+            DataManager.getAll("messages")
+            .then(allMessages => this.setState({
+                messages: allMessages
+            }))
+        })
+    }
+
+    addMessage = (message) => DataManager.add("messages", message)
+    .then(() => DataManager.getAll("messages"))
+    .then(messages => this.setState({
+    messages: messages
+    }))
+
+    editMessage = (id, newEntry) => DataManager.edit("messages", id, newEntry)
+    .then(() => DataManager.getAll("messages"))
+    .then(messages => this.setState({
+    messages: messages
+
+    }))
+    taskComplete = (id, object) => {
+        let localUser = JSON.parse(localStorage.getItem("user"));
+        DataManager.edit("tasks", id, object)
+        .then(() => DataManager.getUnfinishedTasks("tasks", localUser.id))
+        .then((tasks) => {this.setState({tasks: tasks})})
+    }
+    editTask = (id, object) => {
+        let localUser = JSON.parse(localStorage.getItem("user"));
+        DataManager.edit("tasks", id, object)
+        .then(() => DataManager.getUnfinishedTasks("tasks", localUser.id))
+        .then((tasks) => {this.setState({tasks: tasks})})
+    }
     deleteTask = (string,task) => {
             let localUser = JSON.parse(localStorage.getItem("user"));
             DataManager.remove(string, task)
-            .then(() => DataManager.getUserData("tasks", localUser.id))
+            .then(() => DataManager.getUnfinishedTasks("tasks", localUser.id))
         .then(tasks => this.setState({
             tasks: tasks
         }))
@@ -102,7 +142,7 @@ export default class UserPage extends Component {
     addTask = (string, task) => {
     let localUser = JSON.parse(localStorage.getItem("user"));
     DataManager.add(string, task)
-    .then(() => DataManager.getUserData("tasks", localUser.id))
+    .then(() => DataManager.getUnfinishedTasks("tasks", localUser.id))
         .then(tasks => this.setState({
         tasks: tasks
     }))
@@ -177,12 +217,13 @@ export default class UserPage extends Component {
                     }
                     {
                         this.state.taskShow === true &&
-                        <TaskList deleteTask={this.deleteTask} addTask={this.addTask} tasks={this.state.tasks}/>
+                        <TaskList deleteTask={this.deleteTask} editTask={this.editTask} addTask={this.addTask} taskComplete={this.taskComplete} tasks={this.state.tasks}/>
                     }
                 </div>
                 <div className="right-container">
-                    <h2>More Stuffs!</h2>
+                    <MessageList messages={this.state.messages} deleteMessage = {this.deleteMessage} addMessage = {this.addMessage} user = {this.state.user} allUsers = {this.state.allUsers} editMessage ={this.editMessage}/>
                 </div>
+                
             </div>
         )
     }
