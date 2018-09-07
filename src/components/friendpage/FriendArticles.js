@@ -9,7 +9,7 @@ export default class ArticleList extends Component {
                 <section className="article-cards-container">
                 {
                     this.props.articles.map(article =>
-                        <div id={`article--${article.id}`} className="card article-card">
+                        <div key={article.id} id={`article--${article.id}`} className="card article-card">
                             <div className="card-body">
                                 <h4 className="card-title">{article.title}</h4>
                                 <p>{article.description}</p>

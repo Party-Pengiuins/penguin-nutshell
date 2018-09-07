@@ -15,7 +15,6 @@ export default class FriendForm extends Component {
     searchFriend = () => {
         let friend = this.props.allUsers.find(u => u.username === this.state.username)
         if(friend){
-            console.log(friend)
             this.setState({found: true})
         } else {
             alert("No user was found")
@@ -33,7 +32,7 @@ export default class FriendForm extends Component {
             friendId: newFriend.id
         }
         this.props.saveFriend(newFriendship)
-        .then(( )=> this.setState({username: "", found: false}))
+        .then(()=> this.setState({username: "", found: false}))
     }
 
     render(){

@@ -10,6 +10,7 @@ import { Tabs, Tab, TabList, Icon, TabLink } from "bloomer";
 import 'bulma/css/bulma.css'
 import ProfileCard from "./profile/ProfileCard";
 import FriendsList from "./friends/FriendsList";
+import NavBar from "./nav/NavBar";
 
 export default class UserPage extends Component {
     state = {
@@ -22,7 +23,9 @@ export default class UserPage extends Component {
         allUsers: [],
         articleShow: true,
         eventShow: false,
-        taskShow: false
+        taskShow: false,
+        messageShow: true,
+        friendShow: false
     }
 
     componentDidMount(){
@@ -93,6 +96,22 @@ export default class UserPage extends Component {
             articleShow: false,
             eventShow: false,
             taskShow: true
+        })
+    }
+    showMessages = (e) => {
+        e.target.parentElement.parentElement.parentElement.children[1].classList.remove("is-active")
+        e.target.parentElement.parentElement.classList.add("is-active")
+        this.setState({
+            messageShow: true,
+            friendShow: false
+        })
+    }
+    showFriends = (e) => {
+        e.target.parentElement.parentElement.parentElement.children[0].classList.remove("is-active")
+        e.target.parentElement.parentElement.classList.add("is-active")
+        this.setState({
+            messageShow: false,
+            friendShow: true
         })
     }
     taskComplete = (id, object) => {
@@ -167,49 +186,74 @@ export default class UserPage extends Component {
 
     render(){
         return (
-            <div className="content-container">
-                <div className="left-container">
-                    <ProfileCard user={this.state.user} editProfile={this.editProfile} />
-                </div>
-                <div className="mid-container">
-                    <Tabs>
-                        <TabList>
-                            <Tab isActive>
-                                <TabLink>
-                                    <Icon isSize='small'><span className='fa fa-image' aria-hidden='true' /></Icon>
-                                    <span onClick={this.showArticles}>Articles</span>
-                                </TabLink>
-                            </Tab>
-                            <Tab>
-                                <TabLink>
-                                    <Icon isSize='small'><span className='fa fa-music' aria-hidden='true' /></Icon>
-                                    <span onClick={this.showEvents}>Events</span>
-                                </TabLink>
-                            </Tab>
-                            <Tab>
-                                <TabLink>
-                                    <Icon isSize='small'><span className='fa fa-film' aria-hidden='true' /></Icon>
-                                    <span onClick={this.showTasks}>Tasks</span>
-                                </TabLink>
-                            </Tab>
-                        </TabList>
-                    </Tabs>
-                    {
-                        this.state.articleShow === true &&
-                        <ArticleList user={this.state.user} articles={this.state.articles} addArticle={this.addArticle} deleteArticle={this.deleteArticle}/>
-                    }
-                    {
-                        this.state.eventShow === true &&
-                        <EventList events={this.state.events} addEvent={this.addEvent} removeEvent={this.removeEvent} editEvent={this.editEvent} />
-                    }
-                    {
-                        this.state.taskShow === true &&
-                        <TaskList deleteTask={this.deleteTask} editTask={this.editTask} addTask={this.addTask} taskComplete={this.taskComplete} tasks={this.state.tasks}/>
-                    }
-                </div>
-                <div className="right-container">
-                    <h2>More Stuffs!</h2>
-                    <FriendsList {...this.props} friends={this.state.friends} allUsers={this.state.allUsers} saveFriend={this.saveFriend} removeFriend={this.removeFriend} user={this.state.user} />
+            <div className="wrapper">
+                <NavBar {...this.props} />
+                <div className="content-container">
+                    <div className="left-container">
+                        <ProfileCard user={this.state.user} editProfile={this.editProfile} />
+                    </div>
+                    <div className="mid-container">
+                        <Tabs>
+                            <TabList>
+                                <Tab isActive>
+                                    <TabLink>
+                                        <Icon isSize='small'><span className='fa fa-image' aria-hidden='true' /></Icon>
+                                        <span onClick={this.showArticles}>Articles</span>
+                                    </TabLink>
+                                </Tab>
+                                <Tab>
+                                    <TabLink>
+                                        <Icon isSize='small'><span className='fa fa-music' aria-hidden='true' /></Icon>
+                                        <span onClick={this.showEvents}>Events</span>
+                                    </TabLink>
+                                </Tab>
+                                <Tab>
+                                    <TabLink>
+                                        <Icon isSize='small'><span className='fa fa-film' aria-hidden='true' /></Icon>
+                                        <span onClick={this.showTasks}>Tasks</span>
+                                    </TabLink>
+                                </Tab>
+                            </TabList>
+                        </Tabs>
+                        {
+                            this.state.articleShow === true &&
+                            <ArticleList user={this.state.user} articles={this.state.articles} addArticle={this.addArticle} deleteArticle={this.deleteArticle}/>
+                        }
+                        {
+                            this.state.eventShow === true &&
+                            <EventList events={this.state.events} addEvent={this.addEvent} removeEvent={this.removeEvent} editEvent={this.editEvent} />
+                        }
+                        {
+                            this.state.taskShow === true &&
+                            <TaskList deleteTask={this.deleteTask} editTask={this.editTask} addTask={this.addTask} taskComplete={this.taskComplete} tasks={this.state.tasks}/>
+                        }
+                    </div>
+                    <div className="right-container">
+                        <Tabs>
+                            <TabList>
+                                <Tab isActive>
+                                    <TabLink>
+                                        <Icon isSize='small'><span className='fa fa-image' aria-hidden='true' /></Icon>
+                                        <span onClick={this.showMessages}>Messages</span>
+                                    </TabLink>
+                                </Tab>
+                                <Tab>
+                                    <TabLink>
+                                        <Icon isSize='small'><span className='fa fa-music' aria-hidden='true' /></Icon>
+                                        <span onClick={this.showFriends}>Friends</span>
+                                    </TabLink>
+                                </Tab>
+                            </TabList>
+                        </Tabs>
+                            {
+                                this.state.messageShow === true &&
+                                <h2>Klaus</h2>
+                            }
+                            {
+                                this.state.friendShow === true &&
+                                <FriendsList {...this.props} friends={this.state.friends} allUsers={this.state.allUsers} saveFriend={this.saveFriend} removeFriend={this.removeFriend} user={this.state.user} />
+                            }
+                    </div>
                 </div>
             </div>
         )

@@ -9,7 +9,9 @@ import 'bulma/css/bulma.css'
 import FriendProfile from "./friendpage/FriendProfile";
 import FriendArticles from "./friendpage/FriendArticles";
 import FriendEvents from "./friendpage/FriendEvents";
-
+import FriendTasks from "./friendpage/FriendTasks";
+import FriendsFriends from "./friendpage/FriendsFriends";
+import NavBar from "./nav/NavBar";
 
 export default class FriendPage extends Component {
     state = {
@@ -19,6 +21,7 @@ export default class FriendPage extends Component {
         articles: [],
         messages: [],
         friends: [],
+        loginUserFriends: [],
         allUsers: [],
         articleShow: true,
         eventShow: false,
@@ -41,6 +44,8 @@ export default class FriendPage extends Component {
         .then(users => {newState.allUsers = users})
         .then(() => DataManager.getUserData("friends", newState.user.id))
         .then(friends => {newState.friends = friends})
+        .then(() => DataManager.getUserData("friends", JSON.parse(localStorage.getItem("user")).id))
+        .then(friends => {newState.loginUserFriends = friends})
         .then(() => {
             this.setState(newState)
         })
@@ -78,54 +83,101 @@ export default class FriendPage extends Component {
             taskShow: true
         })
     }
+    showMessages = (e) => {
+        e.target.parentElement.parentElement.parentElement.children[1].classList.remove("is-active")
+        e.target.parentElement.parentElement.classList.add("is-active")
+        this.setState({
+            messageShow: true,
+            friendShow: false
+        })
+    }
+    showFriends = (e) => {
+        e.target.parentElement.parentElement.parentElement.children[0].classList.remove("is-active")
+        e.target.parentElement.parentElement.classList.add("is-active")
+        this.setState({
+            messageShow: false,
+            friendShow: true
+        })
+    }
 
+    addFriend = (object) => {
+        return DataManager.add("friends", object)
+        .then(() => DataManager.getUserData("friends", JSON.parse(localStorage.getItem("user")).id))
+        .then(friends => {this.setState({loginUserFriends: friends})})
+    }
     
 
     render(){
         return (
-            <div className="content-container">
-                <div className="left-container">
-                    <FriendProfile user={this.state.user} />
-                </div>
-                <div className="mid-container">
-                    <Tabs>
-                        <TabList>
-                            <Tab isActive>
-                                <TabLink>
-                                    <Icon isSize='small'><span className='fa fa-image' aria-hidden='true' /></Icon>
-                                    <span onClick={this.showArticles}>Articles</span>
-                                </TabLink>
-                            </Tab>
-                            <Tab>
-                                <TabLink>
-                                    <Icon isSize='small'><span className='fa fa-music' aria-hidden='true' /></Icon>
-                                    <span onClick={this.showEvents}>Events</span>
-                                </TabLink>
-                            </Tab>
-                            <Tab>
-                                <TabLink>
-                                    <Icon isSize='small'><span className='fa fa-film' aria-hidden='true' /></Icon>
-                                    <span onClick={this.showTasks}>Tasks</span>
-                                </TabLink>
-                            </Tab>
-                        </TabList>
-                    </Tabs>
-                    {
-                        this.state.articleShow === true &&
-                        <FriendArticles articles={this.state.articles} />
-                    }
-                    {
-                        this.state.eventShow === true &&
-                        <FriendEvents events={this.state.events} />
-                    }
-                    {
-                        this.state.taskShow === true &&
-                        <h1>hello</h1>
-                    }
-                </div>
-                <div className="right-container">
-                    <h2>More Stuffs!</h2>
-                    
+            <div className="wrapper">
+                <NavBar {...this.props} />
+                <div className="content-container">
+                    <div className="left-container">
+                        <FriendProfile user={this.state.user} />
+                    </div>
+                    <div className="mid-container">
+                        <Tabs>
+                            <TabList>
+                                <Tab isActive>
+                                    <TabLink>
+                                        <Icon isSize='small'><span className='fa fa-image' aria-hidden='true' /></Icon>
+                                        <span onClick={this.showArticles}>Articles</span>
+                                    </TabLink>
+                                </Tab>
+                                <Tab>
+                                    <TabLink>
+                                        <Icon isSize='small'><span className='fa fa-music' aria-hidden='true' /></Icon>
+                                        <span onClick={this.showEvents}>Events</span>
+                                    </TabLink>
+                                </Tab>
+                                <Tab>
+                                    <TabLink>
+                                        <Icon isSize='small'><span className='fa fa-film' aria-hidden='true' /></Icon>
+                                        <span onClick={this.showTasks}>Tasks</span>
+                                    </TabLink>
+                                </Tab>
+                            </TabList>
+                        </Tabs>
+                        {
+                            this.state.articleShow === true &&
+                            <FriendArticles articles={this.state.articles} />
+                        }
+                        {
+                            this.state.eventShow === true &&
+                            <FriendEvents events={this.state.events} />
+                        }
+                        {
+                            this.state.taskShow === true &&
+                            <FriendTasks tasks={this.state.tasks} />
+                        }
+                    </div>
+                    <div className="right-container">
+                        <Tabs>
+                            <TabList>
+                                <Tab isActive>
+                                    <TabLink>
+                                        <Icon isSize='small'><span className='fa fa-image' aria-hidden='true' /></Icon>
+                                        <span onClick={this.showMessages}>Messages</span>
+                                    </TabLink>
+                                </Tab>
+                                <Tab>
+                                    <TabLink>
+                                        <Icon isSize='small'><span className='fa fa-music' aria-hidden='true' /></Icon>
+                                        <span onClick={this.showFriends}>Friends</span>
+                                    </TabLink>
+                                </Tab>
+                            </TabList>
+                        </Tabs>
+                            {
+                                this.state.messageShow === true &&
+                                <h2>Klaus</h2>
+                            }
+                            {
+                                this.state.friendShow === true &&
+                                <FriendsFriends friends={this.state.friends} allUsers={this.state.allUsers} addFriend={this.addFriend} loginUserFriends={this.state.loginUserFriends} />
+                            }
+                        
+                    </div>
                 </div>
             </div>
         )

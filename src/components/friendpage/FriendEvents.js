@@ -10,7 +10,7 @@ export default class EventCard extends Component {
                     {
                         this.props.events.map(friendEvent => {
                             return (
-                                <div className="event-card">
+                                <div key={friendEvent.id} className="event-card">
                                     <h5 className="event-date">{friendEvent.date.split("-")[1]} / {friendEvent.date.split("-")[0]}</h5>
                                     <h5 className="event-day">{friendEvent.date.split("-")[2]}</h5>
                                     <h3 className="event-title">{friendEvent.title}</h3>
