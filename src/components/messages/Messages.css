@@ -1,18 +1,9 @@
 .messages {
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-    margin: .3em;
-    padding: .5em;
-    background-color: white;
-    max-height: 65%;
+    padding: 2em .5em;
+    background: linear-gradient(to top, #8e9eab, #eef2f3);
+    max-height: 300px;
     overflow-y: scroll;
     box-shadow: inset 0 0 10px #000000;
-}
-
-
-.card {
-    width: 100em;
 }
 
 .card-title {
@@ -33,6 +24,11 @@
     margin: 0 0 10px 0;
 }
 
+.message-body {
+    height: 100%;
+    border: none;
+}
+
 .message-body h6 {
     font-size: 0.7em;
 }
@@ -44,3 +40,12 @@
     color: red;
 }
 
+.message-card {
+    margin: .5em;
+    padding: .2em;
+    display: block;
+}
+
+.message-label {
+    color: whitesmoke;
+}

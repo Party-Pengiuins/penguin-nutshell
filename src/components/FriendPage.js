@@ -138,6 +138,7 @@ export default class FriendPage extends Component {
                         <FriendProfile user={this.state.userFriend} />
                     </div>
                     <div className="mid-container">
+                        <div className="tab-container">
                         <Tabs>
                             <TabList>
                                 <Tab isActive>
@@ -160,6 +161,7 @@ export default class FriendPage extends Component {
                                 </Tab>
                             </TabList>
                         </Tabs>
+                        </div>
                         {
                             this.state.articleShow === true &&
                             <FriendArticles articles={this.state.articles} />
@@ -174,6 +176,7 @@ export default class FriendPage extends Component {
                         }
                     </div>
                     <div className="right-container">
+                        <div className="tab-container">
                         <Tabs>
                             <TabList>
                                 <Tab isActive>
@@ -190,6 +193,7 @@ export default class FriendPage extends Component {
                                 </Tab>
                             </TabList>
                         </Tabs>
+                        </div>
                             {
                                 this.state.messageShow === true &&
                                 <MessageList messages={this.state.messages} deleteMessage = {this.deleteMessage} addMessage = {this.addMessage} user = {this.state.user} allUsers = {this.state.allUsers} editMessage ={this.editMessage}/>

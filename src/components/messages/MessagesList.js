@@ -52,7 +52,7 @@ export default class MessagesList extends Component {
 
                 <form className="MessageForm">
                     <div className="form-group">
-                        <label htmlFor="messageName">New Message:</label>
+                        <label className="message-label" htmlFor="messageName">New Message:</label>
                         <textarea required="true" 
                                     className="form-control" 
                                     onChange={this.handleFieldChange}
