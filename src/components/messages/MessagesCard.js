@@ -9,12 +9,12 @@ export default class MessageCard extends Component {
 
     render() {
         return (
-            <div key={this.props.messageId} className="card">
+            <div key={this.props.messageId} className="card message-card">
                 {
                     this.props.user.id === this.props.message.userId &&
-                    <div className="card-body">
+                    <div className="card-body message-body">
                         <h6>{this.props.message.date}</h6>
-                        <p className = "card-message" >{this.props.message.content}</p>
+                        <p className = "card-message-content" >{this.props.message.content}</p>
                         
                         <h4>{this.props.allUsers.find(u => u.id === this.props.message.userId).username}</h4>
                         <button className="card-button"
@@ -24,7 +24,7 @@ export default class MessageCard extends Component {
                 }
                 {
                     this.props.user.id !== this.props.message.userId &&
-                    <div className="card-body">
+                    <div className="card-body message-body">
                             <h6>{this.props.message.date}</h6>
                             <p className = "card-message" >{this.props.message.content}</p>
                             
