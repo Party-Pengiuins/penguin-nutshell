@@ -1,31 +1,34 @@
+/*
 import React, { Component } from "react"
 import "./Messages.css"
+//import DataManager from "../modules/DataManager";
 
 export default class MessagesForm extends Component {
     // Set initial state //emplty like empty string to be blank
     state = {
-        message: "",
+        newMessage: "",
     }
 
-    // Update state whenever an input field is edited
+  
     handleFieldChange = evt => {
         const stateToChange = {}
         stateToChange[evt.target.id] = evt.target.value
         this.setState(stateToChange)
     }
-
-    /*
-        Local method for validation, creating animal object, and
-        invoking the function reference passed from parent component
-     */
+    
+    
     constructNewMessage = evt => {
         evt.preventDefault()
             const message = {
+                date: this.state.Date.now(),
                 name: this.state.messageName,
+                //userName: this.state.username,
+                
             }
 
-            // Create the animal and redirect user to animal list
+        
             this.props.addMessage(message).then(() => this.props.history.push("/messages"))
+
         
     }
 
@@ -47,3 +50,5 @@ export default class MessagesForm extends Component {
         )
     }
 }
+
+*/

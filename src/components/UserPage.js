@@ -13,6 +13,7 @@ import MessageList from "./messages/MessagesList";
 export default class UserPage extends Component {
     state = {
         user: {},
+        allUsers: [],
         events: [],
         tasks: [],
         articles: [],
@@ -33,8 +34,10 @@ export default class UserPage extends Component {
         .then(tasks => {newState.tasks = tasks})
         .then(() => DataManager.getUserData("articles", localUser.id))
         .then(articles => {newState.articles = articles})
-        .then(() => DataManager.getUserData("messages", localUser.id))
+        .then(() => DataManager.getAll("messages"))
         .then(messages => {newState.messages = messages})
+        .then(() => DataManager.getAll("users"))
+        .then(users => {newState.allUsers = users})
         .then(() => DataManager.getUserData("friends", localUser.id))
         .then(friends => {newState.friends = friends})
         .then(() => {
@@ -65,6 +68,28 @@ export default class UserPage extends Component {
             taskShow: true
         })
     }
+
+
+    deleteMessage = (id) => {
+        DataManager.remove("messages", id).then(() => {
+            DataManager.getAll("messages")
+            .then(allMessages => this.setState({
+                messages: allMessages
+            }))
+        })
+    }
+
+    addMessage = (message) => DataManager.add("messages", message)
+    .then(() => DataManager.getAll("messages"))
+    .then(messages => this.setState({
+    messages: messages
+    }))
+
+    editMessage = (id, newEntry) => DataManager.patch(id, "messages", newEntry)
+    .then(() => DataManager.getAll("messages"))
+    .then(messages => this.setState({
+    messages: messages
+    }))
     
     render(){
         return (
@@ -104,8 +129,9 @@ export default class UserPage extends Component {
                     }
                 </div>
                 <div className="right-container">
-                    <MessageList messages={this.state.messages}/>
+                    <MessageList messages={this.state.messages} deleteMessage = {this.deleteMessage} addMessage = {this.addMessage} user = {this.state.user} allUsers = {this.state.allUsers} editMessage ={this.editMessage}/>
                 </div>
+                
             </div>
         )
     }

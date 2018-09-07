@@ -1,3 +1,4 @@
+/*
 const remoteURL = "http://localhost:5002"
 
 export default Object.create(null, {
@@ -26,7 +27,7 @@ export default Object.create(null, {
         }
 
     },
-*/
+
     post: {
         value: function (resource, newEntry) {
             console.log(`${remoteURL}/${resource}`)
@@ -57,3 +58,4 @@ export default Object.create(null, {
 
 })
 
+*/
