@@ -46,13 +46,11 @@ export default class EditMessage extends Component {
   render() {
     return (
       <React.Fragment>
-        <Button color="success" onClick={this.toggle}>Edit Messages</Button>
+        <Button color="success" onClick={this.toggle}>Edit Message</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Edit Messages</ModalHeader>
+          <div className="madi-modal"><ModalHeader toggle={this.toggle}>Edit Message</ModalHeader>
           <ModalBody>
             <FormGroup>
-
-          
             <Label for="message">Message:</Label>
             <Input id="content"
                     className="form-control mb-2"
@@ -69,6 +67,7 @@ export default class EditMessage extends Component {
             <Button color="success" type="submit" onClick={this.editOldMessage}>Save Edit</Button>
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
+          </div>
         </Modal>
       </React.Fragment>
     );
