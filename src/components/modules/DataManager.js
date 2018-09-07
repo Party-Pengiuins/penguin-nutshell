@@ -19,6 +19,12 @@ export default Object.create(null, {
             .then(res => res.json())
         }
     },
+    // getSortedData: {
+    //     value: (key, userId, sortBy, order) => {
+    //         return fetch(`${remoteURL}/${key}?userId=${userId}&_sort=${sortBy}&_order=${order}`)
+    //         .then(res => res.json())
+    //     }
+    // },
     remove: {
         value: (key, id) => {
             return fetch(`${remoteURL}/${key}/${id}`, {
@@ -49,5 +55,11 @@ export default Object.create(null, {
             })
             .then(result => result.json())
         }
-    }
-})
+    },
+    getUnfinishedTasks: {
+        value: (key, userId) => {
+            return fetch(`${remoteURL}/${key}/?userId=${userId}&completed=false`)
+            .then(result => result.json())
+            }
+
+}})
