@@ -3,14 +3,28 @@
 }
 
 .article-list-container {
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.article-card-container {
     display: flex;
     justify-content: center;
     flex-direction: column;
 }
 
 .article-card {
-    margin: 1rem 1rem 1rem 1rem;
+    max-width: 100%;
+    min-width: 100%;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+.article-card a {
+    font-size: 15px;
+}
+.article-card h4 {
+
 }
 .add-new-article-btn {
     display: flex;

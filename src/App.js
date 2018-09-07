@@ -6,7 +6,7 @@ import ApplicationViews from "./components/ApplicationViews";
 
 
 export default class App extends Component {
-    isAuthenticated = () => localStorage.getItem("user") !== null
+    isAuthenticated = () => sessionStorage.getItem("user") !== null
     
     render() {
         return (

@@ -24,7 +24,7 @@ export default class Login extends Component {
                 let loginUser = users.find(user => user.username === this.state.username && user.email === this.state.email)
                 if(loginUser){
                     console.log("hello")
-                    localStorage.setItem("user", JSON.stringify(loginUser))
+                    sessionStorage.setItem("user", JSON.stringify(loginUser))
                     this.props.history.push("/userpage")
                 } else {
                     alert("Please actually login you piece of shit")

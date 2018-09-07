@@ -10,7 +10,7 @@ export default class AddTask extends Component {
         description: undefined,
         completed: false,
         date: undefined,
-        userId: JSON.parse(localStorage.getItem("user")).id
+        userId: JSON.parse(sessionStorage.getItem("user")).id
     };
 
     this.toggle = this.toggle.bind(this);
@@ -30,7 +30,7 @@ export default class AddTask extends Component {
         description: this.state.description,
         completed: false,
         date: this.state.date,
-        userId: JSON.parse(localStorage.getItem("user")).id
+        userId: JSON.parse(sessionStorage.getItem("user")).id
     }
     if((task.title === undefined) || (task.description === undefined) || (task.date === undefined)){
         window.alert("Please fill out the form")
@@ -41,7 +41,7 @@ export default class AddTask extends Component {
             description: undefined,
             completed: false,
             date: undefined,
-            userId: JSON.parse(localStorage.getItem("user")).id
+            userId: JSON.parse(sessionStorage.getItem("user")).id
         })
 
         // this.newTitle.value=""

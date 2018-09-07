@@ -16,7 +16,7 @@ const ArticleCard = ({article, deleteArticle}) => {
                     <p>{article.description}</p>
                     <a href={`${article.URL}`}>{article.title}</a>
                     <p>{article.date}</p>
-                        <button
+                        <button id="delete-article-btn"
                             onClick={() => deleteArticle("articles", article.id)}
                             className="card-link">Delete Article
                         </button>
@@ -32,7 +32,7 @@ const ArticleCard = ({article, deleteArticle}) => {
                     <p>{article.description}</p>
                     <a href={`https://${article.URL}`}>{article.title}</a>
                     <p>{article.date}</p>
-                        <button
+                        <button id="delete-article-btn"
                             onClick={() => deleteArticle("articles", article.id)}
                             className="card-link">Delete Article
                         </button>
