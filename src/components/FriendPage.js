@@ -3,7 +3,6 @@ import React from "react";
 import DataManager from "./modules/DataManager";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./userPage.css"
-
 import { Tabs, Tab, TabList, Icon, TabLink } from "bloomer";
 import 'bulma/css/bulma.css'
 import FriendProfile from "./friendpage/FriendProfile";
@@ -34,7 +33,7 @@ export default class FriendPage extends Component {
 
     componentDidMount(){
         let newState = {};
-        newState.user = JSON.parse(localStorage.getItem("user"))
+        newState.user = JSON.parse(sessionStorage.getItem("user"))
         DataManager.getUser(this.props.match.params.username)
         .then(user => {newState.userFriend = user[0]})
         .then(() => DataManager.getUserData("events", newState.userFriend.id))
@@ -49,7 +48,7 @@ export default class FriendPage extends Component {
         .then(users => {newState.allUsers = users})
         .then(() => DataManager.getUserData("friends", newState.userFriend.id))
         .then(friends => {newState.friends = friends})
-        .then(() => DataManager.getUserData("friends", JSON.parse(localStorage.getItem("user")).id))
+        .then(() => DataManager.getUserData("friends", JSON.parse(sessionStorage.getItem("user")).id))
         .then(friends => {newState.loginUserFriends = friends})
         .then(() => {
             this.setState(newState)
@@ -107,7 +106,7 @@ export default class FriendPage extends Component {
 
     addFriend = (object) => {
         return DataManager.add("friends", object)
-        .then(() => DataManager.getUserData("friends", JSON.parse(localStorage.getItem("user")).id))
+        .then(() => DataManager.getUserData("friends", JSON.parse(sessionStorage.getItem("user")).id))
         .then(friends => {this.setState({loginUserFriends: friends})})
     }
 

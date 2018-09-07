@@ -20,7 +20,7 @@ export default class EventAdd extends Component {
             alert("Please fill out the rest of the information for your Event :)")
         } else {
             let newEvent = this.state
-            newEvent.userId = JSON.parse(localStorage.getItem("user")).id
+            newEvent.userId = JSON.parse(sessionStorage.getItem("user")).id
             this.props.renderAddBtn()
             this.props.addEvent(newEvent)
         }

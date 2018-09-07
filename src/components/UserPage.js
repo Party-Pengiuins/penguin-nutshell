@@ -32,7 +32,7 @@ export default class UserPage extends Component {
 
     componentDidMount(){
         let newState = {};
-        let localUser = JSON.parse(localStorage.getItem("user"));
+        let localUser = JSON.parse(sessionStorage.getItem("user"));
         newState.user = localUser;
         DataManager.getUserData("events", localUser.id)
         .then(events => {newState.events = events})
@@ -62,7 +62,7 @@ export default class UserPage extends Component {
         })
     }
     addArticle = (string, article) => {
-        let localUser = JSON.parse(localStorage.getItem("user"));
+        let localUser = JSON.parse(sessionStorage.getItem("user"));
         DataManager.add(string, article)
         .then(() => DataManager.getUserData("articles", localUser.id))
         .then(articles => this.setState({
@@ -70,7 +70,7 @@ export default class UserPage extends Component {
         }))
     }
     deleteArticle = (string, article) => {
-        let localUser = JSON.parse(localStorage.getItem("user"));
+        let localUser = JSON.parse(sessionStorage.getItem("user"));
         DataManager.remove(string, article)
         .then(() => DataManager.getUserData("articles", localUser.id))
         .then(articles => this.setState({
@@ -140,19 +140,19 @@ export default class UserPage extends Component {
 
     }))
     taskComplete = (id, object) => {
-        let localUser = JSON.parse(localStorage.getItem("user"));
+        let localUser = JSON.parse(sessionStorage.getItem("user"));
         DataManager.edit("tasks", id, object)
         .then(() => DataManager.getUnfinishedTasks("tasks", localUser.id))
         .then((tasks) => {this.setState({tasks: tasks})})
     }
     editTask = (id, object) => {
-        let localUser = JSON.parse(localStorage.getItem("user"));
+        let localUser = JSON.parse(sessionStorage.getItem("user"));
         DataManager.edit("tasks", id, object)
         .then(() => DataManager.getUnfinishedTasks("tasks", localUser.id))
         .then((tasks) => {this.setState({tasks: tasks})})
     }
     deleteTask = (string,task) => {
-            let localUser = JSON.parse(localStorage.getItem("user"));
+            let localUser = JSON.parse(sessionStorage.getItem("user"));
             DataManager.remove(string, task)
             .then(() => DataManager.getUnfinishedTasks("tasks", localUser.id))
         .then(tasks => this.setState({
@@ -160,7 +160,7 @@ export default class UserPage extends Component {
         }))
     }
     addTask = (string, task) => {
-    let localUser = JSON.parse(localStorage.getItem("user"));
+    let localUser = JSON.parse(sessionStorage.getItem("user"));
     DataManager.add(string, task)
     .then(() => DataManager.getUnfinishedTasks("tasks", localUser.id))
         .then(tasks => this.setState({
@@ -190,9 +190,9 @@ export default class UserPage extends Component {
 
     editProfile = (object) => {
         return DataManager.edit("users", this.state.user.id, object)
-        .then(() => DataManager.get("users", JSON.parse(localStorage.getItem("user")).id))
+        .then(() => DataManager.get("users", JSON.parse(sessionStorage.getItem("user")).id))
         .then((user) => {
-            localStorage.setItem("user", JSON.stringify(user));
+            sessionStorage.setItem("user", JSON.stringify(user));
             this.setState({user: user})
         })
     }

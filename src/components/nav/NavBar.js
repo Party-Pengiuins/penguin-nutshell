@@ -6,7 +6,7 @@ export default class NavBar extends Component {
     }
 
     handleLogout = () => {
-        localStorage.removeItem("user")
+        sessionStorage.removeItem("user")
         window.location.reload();
     }
 
