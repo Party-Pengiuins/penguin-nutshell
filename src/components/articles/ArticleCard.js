@@ -20,11 +20,13 @@ const ArticleCard = ({article, deleteArticle}) => {
                     <h4 className="card-title">{article.title}</h4>
                     <p>{article.description}</p>
                     <a href={`${article.URL}`}>{article.title}</a>
-                    <p>{article.date}</p>
-                        <Button id="delete-article-btn"
-                            onClick={() => deleteArticle("articles", article.id)}
-                            className="card-link"><FontAwesomeIcon icon="trash-alt" />
-                        </Button>
+                        <div className="article-footer">
+                        <p>{article.date}</p>
+                            <Button id="delete-article-btn"
+                                onClick={() => deleteArticle("articles", article.id)}
+                                className="card-link"><FontAwesomeIcon icon="trash-alt" />
+                            </Button>
+                        </div>
                     </div>
             </div>
         )
@@ -36,11 +38,13 @@ const ArticleCard = ({article, deleteArticle}) => {
                     <h4 className="card-title">{article.title}</h4>
                     <p>{article.description}</p>
                     <a href={`https://${article.URL}`}>{article.title}</a>
-                    <p>{article.date}</p>
-                        <Button id="delete-article-btn"
-                            onClick={() => deleteArticle("articles", article.id)}
-                            className="card-link"><FontAwesomeIcon icon="trash-alt" />
+                    <div className="article-footer">
+                        <p>{article.date}</p>
+                            <Button id="delete-article-btn"
+                                    onClick={() => deleteArticle("articles", article.id)}
+                                    className="card-link"><FontAwesomeIcon icon="trash-alt" />
                         </Button>
+                        </div>
                     </div>
             </div>
         )
