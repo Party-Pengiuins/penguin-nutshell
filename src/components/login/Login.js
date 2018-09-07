@@ -32,7 +32,7 @@ export default class Login extends Component {
                     sessionStorage.setItem("user", JSON.stringify(loginUser))
                     this.props.history.push("/userpage")
                 } else {
-                    alert("Please actually login you piece of shit")
+                    alert("Please actually login")
                 }
             })
         }
@@ -86,7 +86,7 @@ export default class Login extends Component {
                     <div className="login-card elevation-2 limit-width sign-up-card above">
                         <div className="card-body">
                             <h2>Welcome to NutShell</h2>
-                            <small>Another dumb-ass Social Network</small>
+                            {/* <small>Another dumb-ass Social Network</small> */}
                             <div className="input-group username">
                                 <input type="text" placeholder="Username" id="username" onChange={this.handleFieldChange} />
                             </div>

@@ -1,0 +1,31 @@
+.nutshell-nav {
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(to top, #0f2027, #203a43, #2c5364);
+    color: whitesmoke;
+}
+
+.nav-welcome {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nutshell-nav div {
+    margin: 0 1em;
+}
+
+.nutshell-nav button {
+    margin: 0 .5em;
+}
+
+.nav-welcome h1 {
+    font-size: 2em;
+}
+
+.nav-welcome h3 {
+    font-size: 1em;
+    margin-left:  2em;
+    margin-bottom: .3em;
+    padding-top: .95em;
+}

@@ -7,16 +7,30 @@
 .left-container {
     width: 25%;
     margin: 1em;
+    margin-top: 5%;
+    margin-left: .5em;
+    padding: 1em;
+    width: 25%;
+    position: fixed;
+    left: 0;
 }
 
 .mid-container {
     width: 40%;
     margin: 1em;
+    margin-left: -2.5em;
+    padding: 1em;
+    position: relative;
 }
 
 .right-container {
     width: 30%;
     margin: 1em;
+    margin-right: .5em;
+    padding: 1em;
+    width: 30%;
+    position: fixed;
+    right: 0;
 }
 
 .modal {
@@ -34,4 +48,20 @@
 .tabs ul {
     display: flex;
     justify-content: space-around !important;
+}
+
+.wrapper {
+    margin: 0;
+    background: 
+        linear-gradient(to bottom, rgba( 0, 0, 0, .5), rgba( 0, 0, 0, .2)),
+        url("https://images.unsplash.com/photo-1525983917469-623c62a4f19e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=afff13cef58f9ebdd9080b85a7923ca2&auto=format&fit=crop&w=1789&q=80") no-repeat fixed;
+    background-size: cover;
+    min-height: 800px;
+}
+
+.tab-container {
+    background: linear-gradient(to top, #ece9e6, #ffffff);
+    margin-bottom: 1em;
+    padding: .4em;
+    box-shadow: inset 0 0 10px #000000;
 }

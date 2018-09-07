@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import FriendCard from "./FriendCard";
 import FriendForm from "./FriendForm";
+import "./friends.css"
 
 export default class FriendsList extends Component {
     render(){

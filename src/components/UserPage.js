@@ -210,34 +210,36 @@ export default class UserPage extends Component {
     render(){
         return (
             <div className="wrapper">
-                <NavBar {...this.props} />
+                <NavBar {...this.props} user={this.state.user} />
                 <div className="content-container">
                     <div className="left-container">
                         <ProfileCard user={this.state.user} editProfile={this.editProfile} />
                     </div>
                     <div className="mid-container">
-                        <Tabs>
-                            <TabList>
-                                <Tab isActive>
-                                    <TabLink>
-                                        <Icon isSize='small'><span className='fa fa-image' aria-hidden='true' /></Icon>
-                                        <span onClick={this.showArticles}>Articles</span>
-                                    </TabLink>
-                                </Tab>
-                                <Tab>
-                                    <TabLink>
-                                        <Icon isSize='small'><span className='fa fa-music' aria-hidden='true' /></Icon>
-                                        <span onClick={this.showEvents}>Events</span>
-                                    </TabLink>
-                                </Tab>
-                                <Tab>
-                                    <TabLink>
-                                        <Icon isSize='small'><span className='fa fa-film' aria-hidden='true' /></Icon>
-                                        <span onClick={this.showTasks}>Tasks</span>
-                                    </TabLink>
-                                </Tab>
-                            </TabList>
-                        </Tabs>
+                        <div className="tab-container">
+                            <Tabs>
+                                <TabList>
+                                    <Tab isActive>
+                                        <TabLink>
+                                            <Icon isSize='small'><span className='fa fa-image' aria-hidden='true' /></Icon>
+                                            <span onClick={this.showArticles}>Articles</span>
+                                        </TabLink>
+                                    </Tab>
+                                    <Tab>
+                                        <TabLink>
+                                            <Icon isSize='small'><span className='fa fa-music' aria-hidden='true' /></Icon>
+                                            <span onClick={this.showEvents}>Events</span>
+                                        </TabLink>
+                                    </Tab>
+                                    <Tab>
+                                        <TabLink>
+                                            <Icon isSize='small'><span className='fa fa-film' aria-hidden='true' /></Icon>
+                                            <span onClick={this.showTasks}>Tasks</span>
+                                        </TabLink>
+                                    </Tab>
+                                </TabList>
+                            </Tabs>
+                        </div>
                         {
                             this.state.articleShow === true &&
                             <ArticleList user={this.state.user} articles={this.state.articles} addArticle={this.addArticle} deleteArticle={this.deleteArticle}/>
@@ -252,22 +254,24 @@ export default class UserPage extends Component {
                         }
                     </div>
                     <div className="right-container">
-                        <Tabs>
-                            <TabList>
-                                <Tab isActive>
-                                    <TabLink>
-                                        <Icon isSize='small'><span className='fa fa-image' aria-hidden='true' /></Icon>
-                                        <span onClick={this.showMessages}>Messages</span>
-                                    </TabLink>
-                                </Tab>
-                                <Tab>
-                                    <TabLink>
-                                        <Icon isSize='small'><span className='fa fa-music' aria-hidden='true' /></Icon>
-                                        <span onClick={this.showFriends}>Friends</span>
-                                    </TabLink>
-                                </Tab>
-                            </TabList>
-                        </Tabs>
+                        <div className="tab-container">
+                            <Tabs>
+                                <TabList>
+                                    <Tab isActive>
+                                        <TabLink>
+                                            <Icon isSize='small'><span className='fa fa-image' aria-hidden='true' /></Icon>
+                                            <span onClick={this.showMessages}>Messages</span>
+                                        </TabLink>
+                                    </Tab>
+                                    <Tab>
+                                        <TabLink>
+                                            <Icon isSize='small'><span className='fa fa-music' aria-hidden='true' /></Icon>
+                                            <span onClick={this.showFriends}>Friends</span>
+                                        </TabLink>
+                                    </Tab>
+                                </TabList>
+                            </Tabs>
+                        </div>
                             {
                                 this.state.messageShow === true &&
                                 <MessageList messages={this.state.messages} deleteMessage = {this.deleteMessage} addMessage = {this.addMessage} user = {this.state.user} allUsers = {this.state.allUsers} editMessage ={this.editMessage}/>
