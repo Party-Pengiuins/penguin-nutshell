@@ -1,4 +1,3 @@
-
 const DateMod = {}
 DateMod.getTime = () => {
     let time = "";

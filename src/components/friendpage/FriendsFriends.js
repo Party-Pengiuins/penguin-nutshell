@@ -4,7 +4,7 @@ export default class FriendsList extends Component {
     
     handleAddFriend = (friend) => {
         let newFriendShip = {
-            userId: JSON.parse(localStorage.getItem("user")).id,
+            userId: this.props.user.id,
             friendId: friend.id
         }
         this.props.addFriend(newFriendShip)
@@ -22,7 +22,7 @@ export default class FriendsList extends Component {
                                     <span>{friend.username}</span>
                                     {
                                         !this.props.loginUserFriends.find(f => f.friendId === friend.id) &&
-                                        friend.username !== JSON.parse(localStorage.getItem("user")).username &&
+                                        friend.username !== this.props.user.username &&
                                         <button onClick={() => {this.handleAddFriend(friend)}}>Add to friends?</button>
                                     }
                                 </div>

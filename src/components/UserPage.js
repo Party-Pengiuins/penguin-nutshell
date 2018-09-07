@@ -3,9 +3,11 @@ import React from "react";
 import DataManager from "./modules/DataManager";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./userPage.css"
+// import ArticleList from "./articles/ArticleList";
+import TaskList from "./tasks/TaskList"
 import ArticleList from "./articles/ArticleList";
 import EventList from "./events/EventList";
-import TaskList from "./tasks/TaskList";
+import MessageList from "./messages/MessagesList";
 import { Tabs, Tab, TabList, Icon, TabLink } from "bloomer";
 import 'bulma/css/bulma.css'
 import ProfileCard from "./profile/ProfileCard";
@@ -15,12 +17,12 @@ import NavBar from "./nav/NavBar";
 export default class UserPage extends Component {
     state = {
         user: {},
+        allUsers: [],
         events: [],
         tasks: [],
         articles: [],
         messages: [],
         friends: [],
-        allUsers: [],
         articleShow: true,
         eventShow: false,
         taskShow: false,
@@ -114,6 +116,29 @@ export default class UserPage extends Component {
             friendShow: true
         })
     }
+
+
+    deleteMessage = (id) => {
+        DataManager.remove("messages", id).then(() => {
+            DataManager.getAll("messages")
+            .then(allMessages => this.setState({
+                messages: allMessages
+            }))
+        })
+    }
+
+    addMessage = (message) => DataManager.add("messages", message)
+    .then(() => DataManager.getAll("messages"))
+    .then(messages => this.setState({
+    messages: messages
+    }))
+
+    editMessage = (id, newEntry) => DataManager.edit("messages", id, newEntry)
+    .then(() => DataManager.getAll("messages"))
+    .then(messages => this.setState({
+    messages: messages
+
+    }))
     taskComplete = (id, object) => {
         let localUser = JSON.parse(localStorage.getItem("user"));
         DataManager.edit("tasks", id, object)
@@ -247,7 +272,7 @@ export default class UserPage extends Component {
                         </Tabs>
                             {
                                 this.state.messageShow === true &&
-                                <h2>Klaus</h2>
+                                <MessageList messages={this.state.messages} deleteMessage = {this.deleteMessage} addMessage = {this.addMessage} user = {this.state.user} allUsers = {this.state.allUsers} editMessage ={this.editMessage}/>
                             }
                             {
                                 this.state.friendShow === true &&
@@ -255,6 +280,7 @@ export default class UserPage extends Component {
                             }
                     </div>
                 </div>
+                
             </div>
         )
     }
