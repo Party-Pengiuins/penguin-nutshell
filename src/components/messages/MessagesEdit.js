@@ -46,9 +46,9 @@ export default class EditMessage extends Component {
   render() {
     return (
       <React.Fragment>
-        <Button color="success" onClick={this.toggle}>Edit Message</Button>
+        <button className="card-button" onClick={this.toggle}>Edit Message</button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <div className="madi-modal"><ModalHeader toggle={this.toggle}>Edit Message</ModalHeader>
+          <div className="klaus-modal"><ModalHeader toggle={this.toggle}>Edit Message</ModalHeader>
           <ModalBody>
             <FormGroup>
             <Label for="message">Message:</Label>
