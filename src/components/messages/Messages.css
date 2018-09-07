@@ -33,11 +33,11 @@
     margin: 0 0 10px 0;
 }
 
-.card-body h6 {
+.message-body h6 {
     font-size: 0.7em;
 }
 
-.card-body h4 {
+.message-body h4 {
     font-size: 0.7em;
     font-style: italic;
     font-family: "Comic Sans MS", cursive, sans-serif;
