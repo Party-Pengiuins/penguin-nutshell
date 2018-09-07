@@ -113,10 +113,11 @@ export default class UserPage extends Component {
     messages: messages
     }))
 
-    editMessage = (id, newEntry) => DataManager.patch(id, "messages", newEntry)
+    editMessage = (id, newEntry) => DataManager.edit("messages", id, newEntry)
     .then(() => DataManager.getAll("messages"))
     .then(messages => this.setState({
     messages: messages
+
     }))
     taskComplete = (id, object) => {
         let localUser = JSON.parse(localStorage.getItem("user"));

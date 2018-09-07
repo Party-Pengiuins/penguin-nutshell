@@ -2,9 +2,6 @@ import React, { Component } from "react"
 import "./Messages.css"
 import MessageCard from "./MessagesCard"
 import DateMod from "../modules/GetDate";
-//import MessageForm from "./MessagesForm"
-//import DataManager from "../modules/DataManager"
-//import MessageForm from "./MessagesForm"
 
 export default class MessagesList extends Component {
     

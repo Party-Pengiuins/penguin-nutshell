@@ -6,15 +6,14 @@ export default class EditMessage extends Component {
     super(props);
     this.state = {
         modal: false,
-        title: undefined,
-        description: undefined,
-        date: undefined
+        content: this.props.message.content
     };
 
     this.toggle = this.toggle.bind(this);
   }
   
 // for bootstrap
+
   toggle() {
     this.setState({
       modal: !this.state.modal,
@@ -24,22 +23,16 @@ export default class EditMessage extends Component {
   editOldMessage = evt => {
     evt.preventDefault()
     const message = {
-        date: DateMod.getDate(),
-        userId: this.props.user.id,
-        content: this.state.messageName,
+        content: this.state.content,
     }
     
     console.log(message)
     
-        this.setState({
-            modal: !this.state.modal,
-            date: undefined,
-            userId: undefined,
-            content: undefined,
-        })
-
-        // this.newTitle.value=""
-        this.props.editMessage("messages", message)
+        this.props.editMessage(this.props.message.id, message)
+        .then(() => this.setState({
+          modal: !this.state.modal,
+          content: undefined,
+      }))
     }
   
 
@@ -58,23 +51,12 @@ export default class EditMessage extends Component {
           <ModalHeader toggle={this.toggle}>Edit Messages</ModalHeader>
           <ModalBody>
             <FormGroup>
-            <Label>Date:</Label>
-            <Input className="form-control mb-2"
-                    onChange={this.handleFieldChange.bind(this)}
-                    required=""
-                    id="date"
-                    type="date"
-                    />
-            <Label>User Name:</Label>
-            <Input id="title"
-                    // ref={(input) => this.newTitle = input}
-                    className="form-control mb-2"
-                    type="text"
-                    onChange={this.handleFieldChange.bind(this)}
-                    placeholder="Name" />
+
+          
             <Label for="message">Message:</Label>
-            <Input id="message"
+            <Input id="content"
                     className="form-control mb-2"
+                    defaultValue={this.props.message.content}
                     type="textarea"
                     required=""
                     name="text"
@@ -84,7 +66,7 @@ export default class EditMessage extends Component {
             </FormGroup>
           </ModalBody>
           <ModalFooter>
-            <Button color="success" type="submit" onClick={this.props.editMessage}>Save Edit</Button>
+            <Button color="success" type="submit" onClick={this.editOldMessage}>Save Edit</Button>
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>

@@ -2,8 +2,10 @@ import React, { Component } from "react"
 //import DataManager from "../modules/DataManager"
 //import { Link } from "react-router-dom"
 import "./Messages.css"
+import MessagesEdit from "./MessagesEdit"
 
 export default class MessageCard extends Component {
+    
 
     render() {
         return (
@@ -18,8 +20,8 @@ export default class MessageCard extends Component {
                         <a className = "card-button" href="#"
                             onClick={() => this.props.deleteMessage(this.props.message.id)}>Delete </a>
                             
-                             <a  className="card-button" href="#" 
-                            onClick={() => this.props.editOldMessage}> Edit</a>
+                             <MessagesEdit editMessage ={this.props.editMessage} message = {this.props.message}/>
+
                     </div>
                 }
                 {
