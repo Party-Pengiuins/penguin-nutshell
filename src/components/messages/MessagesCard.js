@@ -9,7 +9,7 @@ export default class MessageCard extends Component {
 
     render() {
         return (
-            <div key={this.props.messageId} className="card">
+            <div key={this.props.messageId} className="card message-card">
                 {
                     this.props.user.id === this.props.message.userId &&
                     <div className="card-body">
