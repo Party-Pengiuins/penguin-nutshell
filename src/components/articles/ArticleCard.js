@@ -1,8 +1,13 @@
 import React from "react"
 import PropType from "prop-types"
-
+import { Button } from 'reactstrap'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+library.add(faTrashAlt)
 
 const ArticleCard = ({article, deleteArticle}) => {
+
     this.state = {
         URL: article.URL
     }
@@ -16,10 +21,10 @@ const ArticleCard = ({article, deleteArticle}) => {
                     <p>{article.description}</p>
                     <a href={`${article.URL}`}>{article.title}</a>
                     <p>{article.date}</p>
-                        <button id="delete-article-btn"
+                        <Button id="delete-article-btn"
                             onClick={() => deleteArticle("articles", article.id)}
-                            className="card-link">Delete Article
-                        </button>
+                            className="card-link"><FontAwesomeIcon icon="trash-alt" />
+                        </Button>
                     </div>
             </div>
         )
@@ -32,10 +37,10 @@ const ArticleCard = ({article, deleteArticle}) => {
                     <p>{article.description}</p>
                     <a href={`https://${article.URL}`}>{article.title}</a>
                     <p>{article.date}</p>
-                        <button id="delete-article-btn"
+                        <Button id="delete-article-btn"
                             onClick={() => deleteArticle("articles", article.id)}
-                            className="card-link">Delete Article
-                        </button>
+                            className="card-link"><FontAwesomeIcon icon="trash-alt" />
+                        </Button>
                     </div>
             </div>
         )
@@ -46,7 +51,7 @@ ArticleCard.propTypes = {
     article: PropType.shape({
         title: PropType.string.isRequired,
         description: PropType.string.isRequired,
-        URL: PropType.string.isRequired,
+        URL: PropType.string,
         date: PropType.string.isRequired,
         userId: PropType.number.isRequired
         })
