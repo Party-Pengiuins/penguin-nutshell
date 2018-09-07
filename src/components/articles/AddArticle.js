@@ -80,7 +80,7 @@ export default class AddArticle extends Component {
                                         required=""
                                         type="text"
                                         onChange={this.handleFieldChange}
-                                        placeholder="aaayyyyy new article URL" />
+                                        placeholder="Paste your URL here" />
                             </FormGroup>
                         </ModalBody>
                         <ModalFooter>
