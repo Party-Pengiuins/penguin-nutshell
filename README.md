@@ -12,5 +12,16 @@ Lastly, you have 5 days to build it.
 
 ### The Code!
 
-Nutshell is built in React.js and utilizes BOTH of the ReactStrap (Bootstrap for React) and Bloomer (Bulma for React) style libraries for various features and visual effects throughout the project.
+Nutshell is built in React.js and setup with <code>npx -create -react app</code>and utilizes BOTH of the ReactStrap (Bootstrap for React) and Bloomer (Bulma for React) style libraries for various features and visual effects throughout the project.
 I simple, flat datastructure (JSON file) is hosted off of a JSON server. [The Server can be viewed here!](https://github.com/Party-Pengiuins/nutshell-server)
+
+#### How to pull down the project:
+Fork the repo and choose to clone the project
+```sh
+git clone git@github.com:Party-Pengiuins/penguin-nutshell.git
+```
+Then once you are into the project, from the root level run
+```sh
+npm install
+```
+to get the proper packages installed
